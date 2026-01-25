@@ -1,0 +1,11 @@
+.idea
+.DS_Store/*
+.DS_Store
+static/.DS_Store
+static/.DS_Store
+cache
+cache/*
+*.zip
+release/apk
+release/ipa
+cache/*

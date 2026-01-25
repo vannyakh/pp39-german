@@ -1,0 +1,582 @@
+{
+    "easycom": {
+        "tui-(.*)": "@/components/thorui/tui-$1/tui-$1.vue",
+        "^u-(.*)": "uview-ui/components/u-$1/u-$1.vue"
+    },
+    "pages": [
+        // #ifdef APP-PLUS
+        //		{
+        //			"path": "pages/AppUpdate/index"
+        //		},
+        //#endif
+
+        // #ifdef APP-PLUS
+        {
+            "path": "pages/splash/splash"
+        },
+        //#endif
+        {
+            "path": "pages/index/index"
+        },
+        {
+            "path": "pages/login/welcome"
+        },
+        {
+            "path": "pages/login/index"
+        },
+        {
+            "path": "pages/login/register"
+        },
+        {
+            "path": "pages/login/forget",
+            "style": {
+                "navigationStyle": "custom"
+            }
+        },
+        {
+            "path": "pages/login/agreement",
+            "style": {
+                "navigationStyle": "custom"
+            }
+        },
+        {
+            "path": "pages/my/index",
+            "style": {
+                "navigationStyle": "custom"
+            }
+        },
+        {
+            "path": "pages/my/lang",
+            "style": {
+                "navigationStyle": "custom"
+            }
+        },
+        {
+            "path": "pages/my/record",
+            "style": {
+                "navigationStyle": "custom"
+            }
+        },
+        {
+            "path": "pages/quotation/index",
+            "style": {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/chicang/index",
+            "style": {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/optional/index",
+            "style": {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/my/aboutus",
+            "style": {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/index/notice/index",
+            "style": {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/index/notice/details",
+            "style": {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/my/setting/index",
+            "style": {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/my/setting/passpwd",
+            "style": {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/my/setting/pay_pwd",
+            "style": {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/my/setting/asste_record",
+            "style": {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/my/setting/Y_to_Z",
+            "style": {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/my/setting/Z_to_Y",
+            "style": {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/my/setting/realName",
+            "style": {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/quotation/details",
+            "style": {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/index/menu/index",
+            "style": {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/index/new_SG/details",
+            "style": {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/index/unline/details",
+            "style": {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/index/dazong/details",
+            "style": {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/index/notice/zixun_details",
+            "style": {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/index/new_SG/record",
+            "style": {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/index/new_SG/index",
+            "style": {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/index/unline/record",
+            "style": {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/index/unline/index",
+            "style": {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/index/dazong/record",
+            "style": {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/index/dazong/index",
+            "style": {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/my/bank/add",
+            "style": {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/index/searchView",
+            "style": {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/index/vip_QC/details",
+            "style": {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/index/vip_QC/record",
+            "style": {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/index/vip_QC/index",
+            "style": {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/my/setting/score",
+            "style": {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/invest/index",
+            "style": {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/invest/investing",
+            "style": {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/invest/my_record",
+            "style": {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/invest/details",
+            "style": {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/news/index",
+            "style": {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/index/service/index",
+            "style": {
+                "navigationBarTitleText": "service",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/invest/index",
+            "style": {
+                "navigationBarTitleText": "Invest",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/invest/investing",
+            "style": {
+                "navigationBarTitleText": "Invest",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/invest/my_record",
+            "style": {
+                "navigationBarTitleText": "Invest",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/invest/details",
+            "style": {
+                "navigationBarTitleText": "Invest",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/chicang/position_details",
+            "style": {
+                "navigationBarTitleText": "Position Details",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/index/bulk/index",
+            "style": {
+                "navigationBarTitleText": "Bulk Stock",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/my/exchange",
+            "style": {
+                "navigationBarTitleText": "Bulk Stock",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/index/eipo/index",
+            "style": {
+                "navigationBarTitleText": "Eipo",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/index/eipo/details",
+            "style": {
+                "navigationBarTitleText": "Eipo",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/index/eipo/record",
+            "style": {
+                "navigationBarTitleText": "Eipo",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/index/money/index",
+            "style": {
+                "navigationBarTitleText": "Stock Fund",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/index/money/position_details",
+            "style": {
+                "navigationBarTitleText": "Position Details",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/index/money/buy_details",
+            "style": {
+                "navigationBarTitleText": "Details",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/index/money/fund_record",
+            "style": {
+                "navigationBarTitleText": "Fund Record",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/index/money/details",
+            "style": {
+                "navigationBarTitleText": "Details",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/forex/forex",
+            "style": {
+                "navigationBarTitleText": "Forex",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/forex/index",
+            "style": {
+                "navigationBarTitleText": "Forex",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/forex/forexSuperFuture",
+            "style": {
+                "navigationBarTitleText": "",
+                "navigationStyle": "custom"
+            }
+        },
+        {
+            "path": "pages/forex/forexSuperFutureRecord",
+            "style": {
+                "navigationBarTitleText": "",
+                "navigationStyle": "custom"
+            }
+        },
+        {
+            "path": "pages/AISubscribe/index",
+            "style": {
+                "navigationBarTitleText": "AISubscribe",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/AISubscribe/record",
+            "style": {
+                "navigationBarTitleText": "AISubscribe",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/AISubscribe/subscribe",
+            "style": {
+                "navigationBarTitleText": "AISubscribe",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/AISubscribe/details",
+            "style": {
+                "navigationBarTitleText": "AISubscribe",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/AISubscribe/fund",
+            "style": {
+                "navigationBarTitleText": "AISubscribe",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/loan/index",
+            "style": {
+                "navigationBarTitleText": "Loan",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/loan/record",
+            "style": {
+                "navigationBarTitleText": "Loan",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/transfer/transfer",
+            "style": {
+                "navigationBarTitleText": ""
+            }
+        },
+        {
+            "path": "pages/transfer/record",
+            "style": {
+                "navigationBarTitleText": ""
+            }
+        },
+        {
+            "path": "pages/statistic/statistic",
+            "style": {
+                "navigationBarTitleText": "Statistic"
+            }
+        },
+        {
+            "path": "pages/statistic/index",
+            "style": {
+                "navigationBarTitleText": "ETF"
+            }
+        },
+        {
+            "path": "pages/statistic/record",
+            "style": {
+                "navigationBarTitleText": "ETF Records"
+            }
+        }
+    ],
+    "globalStyle": {
+        "navigationBarTextStyle": "black",
+        "navigationBarTitleText": "BV23",
+        "navigationBarBackgroundColor": "#F7F7F7",
+        "backgroundColor": "#F7F7F7",
+        "navigationStyle": "custom",
+        "scrollIndicator": "none",
+        "app-plus": {
+            "scrollIndicator": "none"
+        }
+    },
+    "tabBar": {
+        "color": "#666666",
+        "selectedColor": "#066BE8",
+        "borderStyle": "transparent",
+        "backgroundColor": "#FFFFFF",
+
+        "list": [
+            {
+                "text": "Home",
+                "pagePath": "pages/index/index",
+                "iconPath": "/static/tabs/home.png",
+                "selectedIconPath": "/static/tabs/home_active.png"
+            },
+            {
+                "text": "Market",
+                "pagePath": "pages/quotation/index",
+                "iconPath": "/static/tabs/quotation.png",
+                "selectedIconPath": "/static/tabs/quotation_active.png"
+            },
+            {
+                "text": "My Positions",
+                "pagePath": "pages/chicang/index",
+                "iconPath": "/static/tabs/position.png",
+                "selectedIconPath": "/static/tabs/position_active.png"
+            },
+            {
+                "text": "News",
+                "pagePath": "pages/news/index",
+                "iconPath": "/static/tabs/news.png",
+                "selectedIconPath": "/static/tabs/news_active.png"
+            },
+            {
+                "text": "Me",
+                "pagePath": "pages/my/index",
+                "iconPath": "/static/tabs/mine.png",
+                "selectedIconPath": "/static/tabs/mine_active.png"
+            }
+        ]
+    }
+}

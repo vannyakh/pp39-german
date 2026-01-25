@@ -1,0 +1,377 @@
+/* CSS Variables for theming */
+:root {
+    /* Base Colors */
+    --black: #000;
+    --white: #fff;
+    --bg-color: #F1F1F1; /* #F1F1F1 */
+    --border-color: #333333;
+    --text-color: #333333;
+    --link-color: #42C15F;
+    --success-color: #4cd964;
+    --warning-color: #f0ad4e;
+    --error-color: #dd524d;
+    --info-color: #909399;
+    --primary: #066BE8;
+    --secondary: #1A69FF;
+    --success: #29BC8B;
+    --warning: #f0ad4e;
+    --error: #dd524d;
+    --info: #909399;
+    --text-primary: #f0f0f0;
+    --navBarColor: #066BE8;
+    --card-background: #1e1e1e;
+    --tabBarColor: #4a4a4a;
+    --text-up: #066BE8;
+    --text-down: #dd524d;
+
+    /* Input Colors */
+    --input-background: #2c2c2c;
+    --input-border: #444444;
+    --input-text: #ffffff;
+    --input-placeholder: #808080;
+    --input-focus-border: #42C15F;
+    --input-disabled-background: #1a1a1a;
+    --input-disabled-text: #666666;
+    --input-disabled-border: #333333;
+    --input-error-border: #dd524d;
+    --input-success-border: #4cd964;
+    --input-warning-border: #f0ad4e;
+    --input-info-border: #909399;
+    --input-background-error: #dd524d;
+
+    /* Primary Colors */
+    --primary-50: #E6F2FF;
+    --primary-100: #CCE5FF;
+    --primary-200: #99CCFF;
+    --primary-300: #66B2FF;
+    --primary-400: #3399FF;
+    --primary-500: #066BE8;
+    --primary-600: #0556BA;
+    --primary-700: #04418C;
+    --primary-800: #032C5E;
+    --primary-900: #021730;
+
+    /* Secondary Colors */
+    --secondary-50: #E8F0FF;
+    --secondary-100: #D1E1FF;
+    --secondary-200: #A3C3FF;
+    --secondary-300: #75A5FF;
+    --secondary-400: #4787FF;
+    --secondary-500: #1A69FF;
+    --secondary-600: #1554CC;
+    --secondary-700: #103F99;
+    --secondary-800: #0B2A66;
+    --secondary-900: #061533;
+
+    /* Neutral Colors */
+    --neutral-50: #212529;
+    --neutral-100: #343A40;
+    --neutral-200: #495057;
+    --neutral-300: #868E96;
+    --neutral-400: #ADB5BD;
+    --neutral-500: #CED4DA;
+    --neutral-600: #DEE2E6;
+    --neutral-700: #E9ECEF;
+    --neutral-800: #F1F3F5;
+    --neutral-900: #F8F9FA;
+
+    /* Semantic Colors */
+    --error-50: #FFEBEE;
+    --error-100: #FFCDD2;
+    --error-200: #EF9A9A;
+    --error-300: #E57373;
+    --error-400: #EF5350;
+    --error-500: #F44336;
+    --error-600: #E53935;
+    --error-700: #D32F2F;
+    --error-800: #C62828;
+    --error-900: #B71C1C;
+
+    /* Success Colors */
+    --success-50: #E6F2FF;
+    --success-100: #CCE5FF;
+    --success-200: #99CCFF;
+    --success-300: #66B2FF;
+    --success-400: #3399FF;
+    --success-500: #066BE8;
+    --success-600: #0556BA;
+    --success-700: #04418C;
+    --success-800: #032C5E;
+    --success-900: #021730;
+
+    /* Warning Colors */
+    --warning-50: #FFF8E1;
+    --warning-100: #FFECB3;
+    --warning-200: #FFE082;
+    --warning-300: #FFD54F;
+    --warning-400: #FFCA28;
+    --warning-500: #FFC107;
+    --warning-600: #FFB300;
+    --warning-700: #FFA000;
+    --warning-800: #FF8F00;
+    --warning-900: #FF6F00;
+
+    /* Investment Theme Colors */
+    --invest-profit: #4caf50;
+    --invest-loss: #f44336;
+    --invest-neutral: #42C15F;
+    --invest-chart-grid: #333333;
+    --invest-chart-line: #42C15F;
+    --invest-highlight: #066BE8;
+
+    /* Font Sizes */
+    --font-size-xs: 20rpx;
+    --font-size-sm: 24rpx;
+    --font-size-base: 28rpx;
+    --font-size-md: 32rpx;
+    --font-size-lg: 36rpx;
+    --font-size-xl: 40rpx;
+    --font-size-2xl: 48rpx;
+    --font-size-3xl: 56rpx;
+    --font-size-4xl: 64rpx;
+
+    /* Font Weights */
+    --font-weight-light: 300;
+    --font-weight-regular: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+
+    /* Line Heights */
+    --line-height-tight: 1;
+    --line-height-snug: 1.25;
+    --line-height-normal: 1.5;
+    --line-height-relaxed: 1.75;
+    --line-height-loose: 2;
+
+    /* Spacing */
+    --spacing-2xs: 4rpx;
+    --spacing-xs: 8rpx;
+    --spacing-sm: 12rpx;
+    --spacing-base: 16rpx;
+    --spacing-md: 24rpx;
+    --spacing-lg: 32rpx;
+    --spacing-xl: 40rpx;
+    --spacing-2xl: 48rpx;
+    --spacing-3xl: 64rpx;
+    --spacing-4xl: 80rpx;
+
+    /* Border Radius */
+    --radius-none: 0;
+    --radius-sm: 4rpx;
+    --radius-base: 8rpx;
+    --radius-md: 12rpx;
+    --radius-lg: 16rpx;
+    --radius-xl: 24rpx;
+    --radius-2xl: 32rpx;
+    --radius-full: 9999rpx;
+
+    /* Shadows */
+    --shadow-sm: 0 1rpx 2rpx rgba(0, 0, 0, 0.5);
+    --shadow-base: 0 2rpx 4rpx rgba(0, 0, 0, 0.5);
+    --shadow-md: 0 4rpx 6rpx rgba(0, 0, 0, 0.5);
+    --shadow-lg: 0 8rpx 16rpx rgba(0, 0, 0, 0.5);
+    --shadow-xl: 0 16rpx 24rpx rgba(0, 0, 0, 0.5);
+    --shadow-2xl: 0 24rpx 48rpx rgba(0, 0, 0, 0.5);
+    --shadow-inner: inset 0 2rpx 4rpx rgba(0, 0, 0, 0.5);
+
+    /* Z-index */
+    --z-negative: -1;
+    --z-base: 1;
+    --z-dropdown: 1000;
+    --z-sticky: 1020;
+    --z-fixed: 1030;
+    --z-modal: 1040;
+    --z-popover: 1050;
+    --z-tooltip: 1060;
+
+    /* Transitions */
+    --transition-base: all 0.2s ease;
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+    /* Grid Breakpoints */
+    --breakpoint-sm: 640rpx;
+    --breakpoint-md: 768rpx;
+    --breakpoint-lg: 1024rpx;
+    --breakpoint-xl: 1280rpx;
+    --breakpoint-2xl: 1536rpx;
+
+    /* Container Max Widths */
+    --container-sm: 600rpx;
+    --container-md: 720rpx;
+    --container-lg: 960rpx;
+    --container-xl: 1140rpx;
+    --container-2xl: 1320rpx;
+    --card-glass-bg: rgba(255, 255, 255, 0.5);
+}
+
+/* Base Styles */
+page {
+    /*background-color: var(--bg-color);*/
+    /*color: var(--text-color);*/
+}
+swiper {
+    background-color: inherit;
+}
+iframe {
+    left: 0 !important;
+}
+
+view,
+scroll-view,
+button,
+input,
+textarea,
+label,
+navigator {
+    color: var(--text-color);
+}
+
+image {
+    /* Images should maintain their original colors */
+    color: var(--text-color);
+}
+
+.uni-page-head,
+.uni-page-head-ft {
+    background-color: var(--navBarColor) !important;
+    color: var(--text-color);
+}
+
+.uni-page-head-bd {
+    color: var(--text-color);
+}
+
+.uni-input,
+.uni-textarea {
+    background-color: var(--input-background);
+    color: var(--input-text);
+    border-color: var(--input-border);
+}
+
+.uni-btn {
+    background-color: var(--primary);
+    color: var(--text-color);
+}
+
+.uni-badge {
+    background-color: var(--primary);
+}
+
+.uni-list-item,
+.uni-list-item__container {
+    background-color: var(--card-background);
+    color: var(--text-color);
+}
+
+.uni-card {
+    background-color: var(--card-background);
+    color: var(--text-color);
+    border-color: var(--border-color);
+}
+
+/* Utility Classes */
+.text-primary {
+    color: var(--primary-500);
+}
+
+.bg-primary {
+    background-color: var(--primary-500);
+}
+
+.text-error {
+    color: var(--error-500);
+}
+
+.bg-error {
+    background-color: var(--error-500);
+}
+
+.text-success {
+    color: var(--success-500);
+}
+
+.bg-success {
+    background-color: var(--success-500);
+}
+
+.text-warning {
+    color: var(--warning-500);
+}
+
+.bg-warning {
+    background-color: var(--warning-500);
+}
+
+/* Text Colors */
+.text-white {
+    color: var(--white);
+}
+
+.text-black {
+    color: var(--black);
+}
+
+.text-gray {
+    color: var(--neutral-500);
+}
+
+.text-gray-light {
+    color: var(--neutral-300);
+}
+
+.text-gray-dark {
+    color: var(--neutral-700);
+}
+.text-up {
+    color: var(--text-up);
+}
+
+.text-down {
+    color: var(--text-down);
+}
+
+.bg-up {
+    background-color: var(--success);
+}
+.bg-down {
+    background-color: var(--error);
+}
+
+/* Background Colors */
+.bg-white {
+    background-color: var(--white);
+}
+
+.bg-black {
+    background-color: var(--black);
+}
+
+.bg-transparent {
+    background-color: transparent;
+}
+
+.bg-gray {
+    background-color: var(--neutral-500);
+}
+
+.bg-gray-light {
+    background-color: var(--neutral-200);
+}
+
+.bg-gray-dark {
+    background-color: var(--neutral-800);
+}
+
+/* Gradient Backgrounds */
+.bg-gradient-primary {
+    background: linear-gradient(to right, var(--primary-500), var(--secondary-500));
+}
+
+.card-glass {
+    background: var(--card-glass-bg);
+    backdrop-filter: blur(10rpx);
+    -webkit-backdrop-filter: blur(10rpx);
+    border: 1rpx solid rgba(255, 255, 255, 0.18);
+}

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kline</title>
+    <link rel="stylesheet" href="chart.css">
+    <style>
+        .label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 7px;
+        }
+
+        #k-line-chart {
+            /*height: 85vh;*/
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .chart {
+            /*width: 100vw;*/
+            width: 100%;
+            /*height: 100vh;*/
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tuikuan-showModal {
+            width: 100%;
+            height: 100%;
+            /*background-color: rgba(8,10,23,1);*/
+            position: absolute;
+            top: 0rpx;
+            z-index: 100100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .donut {
+            display: inline-block;
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-left-color: #59a782;
+            border-right-color: #CC3131;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: donut-spin 1.0s linear infinite;
+        }
+
+        @keyframes donut-spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .loading-wave {
+            width: 300px;
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+        }
+
+        .loading-bar {
+            width: 20px;
+            height: 10px;
+            margin: 0 5px;
+            border-radius: 5px;
+            animation: loading-wave-animation 1s ease-in-out infinite;
+        }
+
+        .loading-bar:nth-child(2) {
+            animation-delay: 0.1s;
+        }
+
+        .loading-bar:nth-child(3) {
+            animation-delay: 0.2s;
+        }
+
+        .loading-bar:nth-child(4) {
+            animation-delay: 0.3s;
+        }
+
+        @keyframes loading-wave-animation {
+            0% {
+                height: 10px;
+            }
+
+            50% {
+                height: 50px;
+            }
+
+            100% {
+                height: 10px;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+    <!-- loading design -->
+    <div class>
+        <div id="loading1"
+            style="position: fixed;top: 0;left: 0;width: 100%;height: 100%;background-color: rgba(0, 0, 0, 0.5);z-index: 9999;display: none">
+            <div
+                style="position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);background-color: #fff;padding: 20px;border-radius: 5px;">
+                <div style="display: flex;justify-content: center;align-items: center;">
+                    <div class="loading"></div>
+                    <div style="margin-left: 10px;">Loading...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="chart">
+        <div class="tuikuan-showModal" id="loading">
+            <div class="loading-wave">
+                <div class="loading-bar" style="background-color: #CC3131;"></div>
+                <div class="loading-bar" style="background-color: #59a782;"></div>
+                <div class="loading-bar" style="background-color: #CC3131;"></div>
+                <div class="loading-bar" style="background-color: #59a782;"></div>
+            </div>
+        </div>
+        <div id="k-line-chart" style=""> </div>
+    </div>
+    <script type="text/javascript" src="kline.js"></script>
+    <script src="axios.js"></script>
+    <script type="module">
+        const { init } = klinecharts;
+        const chart = init('k-line-chart');
+
+        var timenow = new Date().getTime();
+        const urlParams = new URLSearchParams(window.location.search);
+        const symbol = urlParams.get('symbol');
+        let theme = urlParams.get('theme');
+        if (theme == 'dark') {
+            document.getElementById('k-line-chart').style.background = '#111F2E';
+        }
+
+
+        let historyData = [];
+        let realtimeData = [];
+
+        function genHistoryData(timestamp = new Date().getTime()) {
+            const historySocket = new WebSocket("wss://wss.bvbkwil.com:2346");
+
+            historySocket.onopen = function() {
+                console.log('History WebSocket connected');
+                historySocket.send(JSON.stringify({
+                    symbol,
+                    type: 'history',
+                    timestamp
+                }));
+            };
+
+            // Process incoming messages
+            historySocket.onmessage = (event) => {
+                try {
+                    const { data } = JSON.parse(event.data);
+
+                    const dataList = data.map(item => ({
+                        open: item.open,
+                        close: item.close,
+                        high: item.high,
+                        low: item.low,
+                        volume: item.volume,
+                        timestamp: item.time * 1000
+                    }));
+
+                    chart.applyNewData(dataList);
+                    setTimeout(() => {
+                        document.getElementById('loading').style.display = 'none';
+                    }, 500);
+
+                    return dataList;
+                } catch (err) {
+                    console.error('Error processing history message:', err);
+                }
+            };
+        }
+
+        genHistoryData();
+
+        function genRealtimeData(timestamp = new Date().getTime()) {
+            const realtimeSocket = new WebSocket("wss://wss.bvbkwil.com:2346");
+
+            realtimeSocket.onopen = function() {
+                console.log('Realtime WebSocket connected');
+                realtimeSocket.send(JSON.stringify({
+                    symbol,
+                    type: 'kline',
+                    timestamp
+                }));
+            };
+            // Reconnect logic
+            realtimeSocket.onclose = function() {
+                console.log('Realtime WebSocket disconnected, attempting reconnect...');
+                setTimeout(() => genRealtimeData(timestamp), 100);
+            };
+
+            // Process incoming messages
+            realtimeSocket.onmessage = (event) => {
+                try {
+
+                    const data = JSON.parse(event.data);
+                    const current = data.current;
+
+                    // console.log(current);
+
+                    const formattedData = {
+                        open: current.open,
+                        close: current.close,
+                        high: current.high,
+                        low: current.low,
+                        volume: current.volume,
+                        timestamp: current.time * 1000
+                    };
+
+                    // Check if timestamp is newer than last data point
+                    const lastDataPoint = chart.getDataList().slice(-1)[0];
+
+					chart.applyNewData(formattedData);
+					chart.updateData(formattedData)
+                    // if (!lastDataPoint || formattedData.timestamp > lastDataPoint.timestamp) {
+                    //     chart.applyNewData(formattedData);
+					// 	chart.updateData(formattedData)
+					// 	setTimeout(() => , 100);
+                    // } else {
+                    //     console.log('Skipping out of order data point');
+                    // }
+
+                    return formattedData;
+                } catch (err) {
+                    console.error('Error processing realtime message:', err);
+                }
+            };
+        }
+
+        chart.applyNewData(genRealtimeData());
+
+        // chart.loadMore((timestamp) => {
+        //     // loadMoreTimer = setTimeout(() => {
+        //     //     chart.applyMoreData(genData(timestamp), true)
+        //     // }, 8000)
+        // })
+        // chart.applyNewData(genData(), true)
+        chart.createIndicator('MA', false, { id: 'candle_pane' });
+        chart.setStyles({
+            grid: false,
+
+            candleStick: {
+                priceMark: {
+                    high: {
+                        display: false
+                    },
+                    low: {
+                        display: false
+                    }
+                },
+                bar: {
+                    color: '#FF4500',
+                    style: 1,
+                    width: 1,
+                },
+            },
+            technicalIndicator: {
+                line: {
+                    color: '#FFD700'
+                }
+            },
+            // custom indicator size
+        });
+    </script>
+</body>
+
+</html>

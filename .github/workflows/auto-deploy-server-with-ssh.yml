@@ -1,0 +1,68 @@
+name: Auto Deploy via Cloudflare Tunnel SSH (Password Auth Variant)
+on:
+  push:
+    branches:
+    - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    concurrency:
+      group: production-deployment
+      cancel-in-progress: false
+
+    permissions:
+      contents: read
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Ensure cloudflared installed
+      run: |
+        set -e
+        if command -v cloudflared >/dev/null 2>&1; then
+          echo "cloudflared already present: $(cloudflared --version)"
+        else
+          echo "cloudflared not found; installing..."
+          curl -L https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb -o cloudflared.deb
+          sudo dpkg -i cloudflared.deb
+          echo "Installed: $(cloudflared --version)"
+        fi
+
+    - name: Install sshpass & write SSH config (password auth)
+      run: |
+        set -e
+        sudo apt-get update -y
+        sudo apt-get install -y sshpass
+        mkdir -p ~/.ssh
+        cat > ~/.ssh/config <<'EOF'
+        Host cf-target
+          HostName ssh.nealika.dev
+          User ${{ secrets.SERVER_USER }}
+          ProxyCommand cloudflared access ssh --hostname %h
+          PreferredAuthentications password
+          PubkeyAuthentication no
+        EOF
+        chmod 600 ~/.ssh/config
+        echo "SSH config (password auth) written:" && cat ~/.ssh/config
+
+    - name: Deploy application via Cloudflare Tunnel SSH (password)
+      run: |
+        set -e
+        echo "🚀 Starting deployment (password auth)..."
+        sshpass -p "${{ secrets.SSH_PASSWORD }}" \
+          ssh -o StrictHostKeyChecking=no cf-target <<'REMOTE'
+          set -e
+          echo "➡ Navigating to project directory..."
+          cd /www/wwwroot/bv23-app.codexdev.cc
+
+          echo "➡ Pulling latest code..."
+          git fetch origin
+          git reset --hard origin/main
+          git clean -fd -e .user.ini
+          echo "✔ Deployment completed successfully."
+          
+        REMOTE
+        echo "🏁 Deployment job finished."

@@ -1,0 +1,26 @@
+/* #ifdef H5 */
+uni-page {
+  opacity: 0;
+}
+
+uni-page.animation-before {
+  transform: translateY(20px);
+}
+
+uni-page.animation-leave {
+  transition: all 0.3s ease;
+}
+
+uni-page.animation-enter {
+  transition: all 0.3s ease;
+}
+
+uni-page.animation-show {
+  opacity: 1;
+}
+
+uni-page.animation-after {
+  transform: translateY(0);
+}
+
+/* #endif */

@@ -1,0 +1,45 @@
+# EditorConfig for Nuxt 3 + TypeScript + Prettier + ESLint
+# Using 4 spaces per indent
+# https://editorconfig.org
+
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+indent_style = space
+indent_size = 4
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# Markdown files: keep trailing spaces for line breaks
+[*.md]
+trim_trailing_whitespace = false
+
+# YAML and JSON (config files, i18n, etc.)
+[*.{yml,yaml,json}]
+indent_size = 4
+
+# Vue single-file components
+[*.vue]
+indent_size = 4
+
+# JavaScript, TypeScript, JSX, TSX
+[*.{js,ts,jsx,tsx}]
+indent_size = 4
+quote_type = single
+max_line_length = off
+
+# CSS, SCSS, PostCSS, Less
+[*.{css,scss,postcss,less}]
+indent_size = 4
+
+# HTML files
+[*.html]
+indent_size = 4
+
+# Ignore minified files
+[*.min.*]
+indent_style = none
+insert_final_newline = false
+trim_trailing_whitespace = false

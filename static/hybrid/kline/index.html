@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Live Trading View: K-Line Analysis</title>
+	<meta name="viewport"
+		content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no,viewport-fit=cover">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="default">
+	<meta name="format-detection" content="telephone=no">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<script type="text/javascript" src="https://unpkg.com/klinecharts@8.6.1/dist/klinecharts.min.js"></script>
+	<!-- <script type="text/javascript" src="datalist.js"></script> -->
+	<style>
+		/* Reset and iframe optimizations */
+		* {
+			padding: 0;
+			margin: 0;
+			box-sizing: border-box;
+			-webkit-tap-highlight-color: transparent;
+			-webkit-touch-callout: none;
+			-webkit-user-select: none;
+			-khtml-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+		}
+
+		html,
+		body {
+			width: 100%;
+			height: 100%;
+			overflow: hidden;
+			/* Prevent scrolling in iframe */
+			background-color: #fff;
+			font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+			-webkit-font-smoothing: antialiased;
+			-moz-osx-font-smoothing: grayscale;
+			touch-action: manipulation;
+			/* Improve touch responsiveness */
+		}
+
+		/* Root container for iframe */
+		.root {
+			width: 100%;
+			height: 100vh;
+			display: flex;
+			flex-direction: column;
+			overflow: hidden;
+		}
+
+		/* Compact header for iframe */
+		.header {
+			flex-shrink: 0;
+			background: linear-gradient(to bottom, #ffffff, #fafafa);
+			border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+			padding: 8px 0;
+		}
+
+		/* Responsive period selector */
+		.times {
+			display: flex;
+			justify-content: space-around;
+			align-items: center;
+			padding: 0 12px;
+			gap: 4px;
+		}
+
+		.times span {
+			flex: 1;
+			padding: 6px 4px;
+			color: #666;
+			font-size: 11px;
+			text-align: center;
+			border-radius: 4px;
+			transition: all 0.2s ease;
+			cursor: pointer;
+			user-select: none;
+			min-height: 28px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-weight: 500;
+		}
+
+		.times span:hover {
+			background-color: rgba(101, 126, 250, 0.08);
+			transform: translateY(-1px);
+		}
+
+		.times span.active {
+			color: #657EFA;
+			font-weight: 600;
+			background-color: rgba(101, 126, 250, 0.12);
+			position: relative;
+			box-shadow: 0 1px 3px rgba(101, 126, 250, 0.2);
+		}
+
+		.times span.active::after {
+			content: '';
+			position: absolute;
+			bottom: -1px;
+			left: 50%;
+			transform: translateX(-50%);
+			width: 16px;
+			height: 2px;
+			background-color: #657EFA;
+			border-radius: 1px;
+		}
+
+		/* Optimized chart container for iframe */
+		.chart-container {
+			flex: 1;
+			display: flex;
+			flex-direction: column;
+			padding: 0 !important;
+			background: #fff;
+			min-height: 0;
+			/* Important for flex container */
+		}
+
+		.chart {
+			flex: 1;
+			position: relative;
+			overflow: hidden;
+			border: 1px solid rgba(0, 0, 0, 0.06);
+			min-height: 200px;
+			/* Minimum height for very small iframes */
+		}
+
+		#k-line-chart {
+			width: 100%;
+			height: 100%;
+			background-color: #fff;
+			border-radius: 8px;
+		}
+
+		/* Enhanced loading for iframe */
+		.tuikuan-showModal {
+			position: absolute;
+			inset: 0;
+			background-color: rgba(255, 255, 255, 0.95);
+			backdrop-filter: blur(2px);
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			z-index: 100100;
+			border-radius: 8px;
+		}
+
+		.donut {
+			width: 28px;
+			height: 28px;
+			border: 2px solid rgba(101, 126, 250, 0.15);
+			border-left-color: #657EFA;
+			border-radius: 50%;
+			animation: donut-spin 0.8s linear infinite;
+		}
+
+		/* From Uiverse.io by dexter-st */
+		.loader-wrapper {
+			position: relative;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			height: 120px;
+			width: auto;
+			margin: 2rem;
+
+			font-family: "Poppins", sans-serif;
+			font-size: 1.6em;
+			font-weight: 600;
+			user-select: none;
+			color: #fff;
+
+			scale: 2;
+		}
+
+		.loader {
+			position: absolute;
+			top: 0;
+			left: 0;
+			height: 100%;
+			width: 100%;
+			z-index: 1;
+
+			background-color: transparent;
+			mask: repeating-linear-gradient(90deg,
+					transparent 0,
+					transparent 6px,
+					black 7px,
+					black 8px);
+		}
+
+		.loader::after {
+			content: "";
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+
+			background-image: radial-gradient(circle at 50% 50%, #ff0 0%, transparent 50%),
+				radial-gradient(circle at 45% 45%, #f00 0%, transparent 45%),
+				radial-gradient(circle at 55% 55%, #0ff 0%, transparent 45%),
+				radial-gradient(circle at 45% 55%, #0f0 0%, transparent 45%),
+				radial-gradient(circle at 55% 45%, #00f 0%, transparent 45%);
+			mask: radial-gradient(circle at 50% 50%,
+					transparent 0%,
+					transparent 10%,
+					black 25%);
+			animation:
+				transform-animation 2s infinite alternate,
+				opacity-animation 4s infinite;
+			animation-timing-function: cubic-bezier(0.6, 0.8, 0.5, 1);
+		}
+
+		@keyframes transform-animation {
+			0% {
+				transform: translate(-55%);
+			}
+
+			100% {
+				transform: translate(55%);
+			}
+		}
+
+		@keyframes opacity-animation {
+
+			0%,
+			100% {
+				opacity: 0;
+			}
+
+			15% {
+				opacity: 1;
+			}
+
+			65% {
+				opacity: 0;
+			}
+		}
+
+		.loader-letter {
+			display: inline-block;
+			opacity: 0;
+			animation: loader-letter-anim 4s infinite linear;
+			z-index: 2;
+		}
+
+		.loader-letter:nth-child(1) {
+			animation-delay: 0.1s;
+		}
+
+		.loader-letter:nth-child(2) {
+			animation-delay: 0.205s;
+		}
+
+		.loader-letter:nth-child(3) {
+			animation-delay: 0.31s;
+		}
+
+		.loader-letter:nth-child(4) {
+			animation-delay: 0.415s;
+		}
+
+		.loader-letter:nth-child(5) {
+			animation-delay: 0.521s;
+		}
+
+		.loader-letter:nth-child(6) {
+			animation-delay: 0.626s;
+		}
+
+		.loader-letter:nth-child(7) {
+			animation-delay: 0.731s;
+		}
+
+		.loader-letter:nth-child(8) {
+			animation-delay: 0.837s;
+		}
+
+		.loader-letter:nth-child(9) {
+			animation-delay: 0.942s;
+		}
+
+		.loader-letter:nth-child(10) {
+			animation-delay: 1.047s;
+		}
+
+		@keyframes loader-letter-anim {
+			0% {
+				opacity: 0;
+			}
+
+			5% {
+				opacity: 1;
+				text-shadow: 0 0 4px #fff;
+				transform: scale(1.1) translateY(-2px);
+			}
+
+			20% {
+				opacity: 0.2;
+			}
+
+			100% {
+				opacity: 0;
+			}
+		}
+
+
+		@keyframes donut-spin {
+			from {
+				transform: rotate(0deg);
+			}
+
+			to {
+				transform: rotate(360deg);
+			}
+		}
+
+		/* Mobile and small iframe optimizations */
+		@media (max-width: 480px) {
+			.header {
+				padding: 6px 0;
+			}
+
+			.times {
+				padding: 0 8px;
+				gap: 2px;
+			}
+
+			.times span {
+				font-size: 10px;
+				padding: 5px 2px;
+				min-height: 24px;
+			}
+
+			/* .chart-container {
+					padding: 6px;
+				} */
+
+			.chart {
+				min-height: 180px;
+			}
+		}
+
+		/* Extra small iframe (like mobile widgets) */
+		@media (max-width: 320px) {
+			.header {
+				padding: 4px 0;
+			}
+
+			.times span {
+				font-size: 9px;
+				padding: 4px 1px;
+				min-height: 20px;
+			}
+
+			/* .chart-container {
+					padding: 4px;
+				} */
+
+			.chart {
+				min-height: 160px;
+				border-radius: 4px;
+			}
+		}
+
+		/* Height-based responsive design for iframe */
+		@media (max-height: 300px) {
+			.header {
+				padding: 4px 0;
+			}
+
+			.times span {
+				font-size: 10px;
+				min-height: 20px;
+			}
+
+			/* .chart-container {
+					padding: 4px;
+				} */
+		}
+
+		/* CSS Variables for theme support */
+		:root {
+			--bg-primary: #ffffff;
+			--bg-secondary: #fafafa;
+			--bg-tertiary: #1a1a1a;
+			--text-primary: #333333;
+			--text-secondary: #666666;
+			--text-tertiary: #cccccc;
+			--border-color: rgba(0, 0, 0, 0.06);
+			--border-color-dark: rgba(255, 255, 255, 0.1);
+			--accent-color: #657EFA;
+			--accent-hover: rgba(101, 126, 250, 0.08);
+			--accent-active: rgba(101, 126, 250, 0.12);
+			--accent-text: #657EFA;
+			--accent-text-dark: #8fa4ff;
+			--chart-bg: #ffffff;
+			--modal-bg: rgba(255, 255, 255, 0.95);
+			--modal-bg-dark: rgba(26, 26, 26, 0.95);
+		}
+
+		/* Light theme (default) */
+		[data-theme="light"] {
+			--bg-primary: #ffffff;
+			--bg-secondary: #fafafa;
+			--text-primary: #333333;
+			--text-secondary: #666666;
+			--border-color: rgba(0, 0, 0, 0.06);
+			--accent-hover: rgba(101, 126, 250, 0.08);
+			--accent-active: rgba(101, 126, 250, 0.12);
+			--accent-text: #657EFA;
+			--chart-bg: #ffffff;
+			--modal-bg: rgba(255, 255, 255, 0.95);
+		}
+
+		/* Dark theme */
+		[data-theme="dark"] {
+			--bg-primary: #1a1a1a;
+			--bg-secondary: #2a2a2a;
+			--text-primary: #ffffff;
+			--text-secondary: #cccccc;
+			--text-tertiary: #999999;
+			--border-color: rgba(255, 255, 255, 0.1);
+			--accent-hover: rgba(101, 126, 250, 0.15);
+			--accent-active: rgba(101, 126, 250, 0.2);
+			--accent-text: #8fa4ff;
+			--chart-bg: #1a1a1a;
+			--modal-bg: rgba(26, 26, 26, 0.95);
+		}
+
+		/* Apply theme variables */
+		html,
+		body {
+			background-color: var(--bg-primary);
+			color: var(--text-primary);
+		}
+
+		.header {
+			background: linear-gradient(to bottom, var(--bg-primary), var(--bg-secondary));
+			border-bottom: 1px solid var(--border-color);
+		}
+
+		.times span {
+			color: var(--text-secondary);
+		}
+
+		.times span:hover {
+			background-color: var(--accent-hover);
+		}
+
+		.times span.active {
+			color: var(--accent-text);
+			background-color: var(--accent-active);
+		}
+
+		.chart {
+			background: var(--chart-bg);
+			border-color: var(--border-color);
+		}
+
+		#k-line-chart {
+			background-color: var(--chart-bg);
+		}
+
+		.tuikuan-showModal {
+			background-color: var(--modal-bg);
+		}
+
+		/* Auto theme detection using prefers-color-scheme */
+		@media (prefers-color-scheme: dark) {
+			:root:not([data-theme]) {
+				--bg-primary: #1a1a1a;
+				--bg-secondary: #2a2a2a;
+				--text-primary: #ffffff;
+				--text-secondary: #cccccc;
+				--text-tertiary: #999999;
+				--border-color: rgba(255, 255, 255, 0.1);
+				--accent-hover: rgba(101, 126, 250, 0.15);
+				--accent-active: rgba(101, 126, 250, 0.2);
+				--accent-text: #8fa4ff;
+				--chart-bg: #1a1a1a;
+				--modal-bg: rgba(26, 26, 26, 0.95);
+			}
+		}
+
+		/* Print styles (for iframe screenshots) */
+		@media print {
+			.header {
+				background: none !important;
+				border: none !important;
+			}
+
+			.chart {
+				border: 1px solid #ccc !important;
+				box-shadow: none !important;
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<div id="app" class="root">
+		<div class="header">
+			<div class="times" id="interval">
+                <span @click="changePeriod('1')" :class="period=='1'?'active':''" id="1">Time</span>
+				<span @click="changePeriod('5')" :class="period=='5'?'active':''" id="5min">5min</span>
+				<span @click="changePeriod('15')" :class="period=='15'?'active':''" id="15min">15min</span>
+				<span @click="changePeriod('30')" :class="period=='30'?'active':''" id="30min">30min</span>
+				<span @click="changePeriod('D')" :class="period=='D'?'active':''" id="D">Daily</span>
+				<span @click="changePeriod('W')" :class="period=='W'?'active':''" id="W">Weekly</span>
+				<span @click="changePeriod('M')" :class="period=='M'?'active':''" id="M">Monthly</span>
+			</div>
+		</div>
+		<div class="chart-container">
+			<div class="chart">
+				<div v-if="zhezhaoceng" class="tuikuan-showModal">
+					<div class="donut"></div>
+				</div>
+				<div id="k-line-chart"></div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="qs.js"></script>
+	<script type="text/javascript" src="vue.js"></script>
+	<script type="text/javascript" src="axios.js"></script>
+	<script type="text/javascript" src="kline.js"></script>
+	<script type="text/javascript">
+		if (this.lang == "zh-cn") {
+            document.getElementById('1').innerText = '分时';
+            document.getElementById('5min').innerText = '5分';
+            document.getElementById('15min').innerText = '15分';
+            document.getElementById('30min').innerText = '30分';
+            document.getElementById('D').innerText = '1天';
+            document.getElementById('W').innerText = '1周';
+            document.getElementById('M').innerText = '1月';
+		} else if (this.lang == 'IND') {
+            document.getElementById('1').innerText = 'समय साझेदारी';
+            document.getElementById('5min').innerText = '5शाखा';
+            document.getElementById('15min').innerText = '15शाखा';
+            document.getElementById('30min').innerText = '30शाखा';
+            document.getElementById('D').innerText = 'दिन';
+            document.getElementById('W').innerText = 'सप्ताह';
+            document.getElementById('M').innerText = 'महीना';
+		} else {
+            document.getElementById('1').innerText = 'Time';
+            document.getElementById('5min').innerText = '5min';
+            document.getElementById('15min').innerText = '15min';
+            document.getElementById('30min').innerText = '30min';
+            document.getElementById('D').innerText = 'Daily';
+            document.getElementById('W').innerText = 'Weekly';
+            document.getElementById('M').innerText = 'Monthly';
+		}
+	</script>
+
+	<script type="text/javascript">
+		// Enhanced iframe optimization script
+		(function () {
+			'use strict';
+
+			// Iframe detection and optimization
+			var isInIframe = window !== window.top;
+			var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+			// Prevent parent page interactions when in iframe
+			if (isInIframe) {
+				// Prevent zoom on mobile when in iframe
+				document.addEventListener('touchstart', function (e) {
+					if (e.touches.length > 1) {
+						e.preventDefault();
+					}
+				}, { passive: false });
+
+				// Handle double-tap zoom prevention
+				var lastTouchEnd = 0;
+				document.addEventListener('touchend', function (e) {
+					var now = (new Date()).getTime();
+					if (now - lastTouchEnd <= 300) {
+						e.preventDefault();
+					}
+					lastTouchEnd = now;
+				}, false);
+
+				// Send ready message to parent
+				window.addEventListener('load', function () {
+					try {
+						window.parent.postMessage({
+							type: 'kline-chart-ready',
+							data: {
+								height: document.body.scrollHeight,
+								width: document.body.scrollWidth
+							}
+						}, '*');
+					} catch (e) {
+						console.log('Cross-origin messaging not available');
+					}
+				});
+			}
+
+			// Enhanced parameter parsing with iframe support
+			function parseUrlParams() {
+				var params = {};
+				var queryString = window.location.search.substring(1) || window.location.hash.substring(1);
+
+				if (!queryString && window.location.href.indexOf('?') > -1) {
+					queryString = window.location.href.split('?')[1];
+				}
+
+				if (queryString) {
+					var pairs = queryString.split('&');
+					for (var i = 0; i < pairs.length; i++) {
+						var pair = pairs[i].split('=');
+						if (pair.length === 2) {
+							params[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1]);
+						}
+					}
+				}
+
+				return params;
+			}
+
+			// Theme detection and application
+			function detectAndApplyTheme() {
+				var urlParams = parseUrlParams();
+				var theme = urlParams.theme || urlParams.mode || 'auto';
+
+				// Theme detection logic
+				if (theme === 'auto') {
+					// Auto detection based on system preference
+					if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+						theme = 'dark';
+					} else {
+						theme = 'light';
+					}
+				}
+
+				// Validate theme value
+				if (theme !== 'light' && theme !== 'dark') {
+					theme = 'light'; // Default fallback
+				}
+
+				// Apply theme to document
+				document.documentElement.setAttribute('data-theme', theme);
+
+				// Store theme for chart updates
+				window.currentTheme = theme;
+
+				console.log('Theme applied:', theme);
+				return theme;
+			}
+
+			var urlParams = parseUrlParams();
+			var lang = urlParams.lang || urlParams.language || 'en';
+			var currentTheme = detectAndApplyTheme();
+
+			// Multi-language support with fallback
+			var translations = {
+				'zh-cn': { '1min': '分时', 'D': '日', 'W': '周', 'M': '月' },
+				'zh-tw': { '1min': '分時', 'D': '日', 'W': '週', 'M': '月' },
+				'zh': { '1min': '分时', 'D': '日', 'W': '周', 'M': '月' },
+				'en': { '1min': 'Time', 'D': 'Daily', 'W': 'Weekly', 'M': 'Monthly' },
+				'default': { '1min': 'Time', 'D': 'Daily', 'W': 'Weekly', 'M': 'Monthly' }
+			};
+
+			var currentLang = translations[lang] || translations['default'];
+
+			// Dynamic watermark functionality
+			function setupWatermark() {
+				try {
+					// Get watermark text from multiple sources
+					var watermarkText = window.tempWatermarkText ||
+						urlParams.watermark ||
+						urlParams.wm ||
+						'Loading';
+
+					// Clear temporary watermark after use
+					if (window.tempWatermarkText) {
+						delete window.tempWatermarkText;
+					}
+
+					// Fallback to different language versions if available
+					if (!urlParams.watermark && !urlParams.wm && !window.tempWatermarkText) {
+						if (lang.indexOf('zh') === 0) {
+							watermarkText = '加载中';
+						} else {
+							watermarkText = 'Loading';
+						}
+					}
+
+					var loaderWrapper = document.getElementById('loader-wrapper');
+					if (loaderWrapper) {
+						// Clear any existing letters
+						var existingLetters = loaderWrapper.querySelectorAll('.loader-letter');
+						existingLetters.forEach(function (letter) {
+							letter.remove();
+						});
+
+						// Create new letters for the watermark
+						var loader = loaderWrapper.querySelector('.loader');
+						for (var i = 0; i < watermarkText.length; i++) {
+							var span = document.createElement('span');
+							span.className = 'loader-letter';
+							span.textContent = watermarkText[i];
+							span.style.animationDelay = (0.1 + i * 0.105) + 's';
+
+							// Insert before the loader div
+							loaderWrapper.insertBefore(span, loader);
+						}
+					}
+				} catch (e) {
+					console.error('Watermark setup error:', e);
+					// Fallback to default text
+					var loaderWrapper = document.getElementById('loader-wrapper');
+					if (loaderWrapper && !loaderWrapper.querySelector('.loader-letter')) {
+						var defaultText = 'Loading';
+						var loader = loaderWrapper.querySelector('.loader');
+						for (var i = 0; i < defaultText.length; i++) {
+							var span = document.createElement('span');
+							span.className = 'loader-letter';
+							span.textContent = defaultText[i];
+							span.style.animationDelay = (0.1 + i * 0.105) + 's';
+							loaderWrapper.insertBefore(span, loader);
+						}
+					}
+				}
+			}
+
+			// Apply translations safely
+			function applyTranslations() {
+				try {
+					var elements = ['1min', 'D', 'W', 'M'];
+					elements.forEach(function (id) {
+						var element = document.getElementById(id);
+						if (element && currentLang[id]) {
+							element.innerText = currentLang[id];
+						}
+					});
+				} catch (e) {
+					console.error('Translation error:', e);
+				}
+			}
+
+			// Apply translations and setup watermark when DOM is ready
+			function initializeInterface() {
+				applyTranslations();
+				setupWatermark();
+			}
+
+			// Expose setupWatermark globally for dynamic updates
+			window.setupWatermark = setupWatermark;
+
+			if (document.readyState === 'loading') {
+				document.addEventListener('DOMContentLoaded', initializeInterface);
+			} else {
+				initializeInterface();
+			}
+
+			// Dynamic resize handler for iframe
+			function handleResize() {
+				if (isInIframe) {
+					try {
+						var height = Math.max(
+							document.body.scrollHeight,
+							document.body.offsetHeight,
+							document.documentElement.clientHeight,
+							document.documentElement.scrollHeight,
+							document.documentElement.offsetHeight
+						);
+
+						window.parent.postMessage({
+							type: 'kline-chart-resize',
+							data: {
+								height: height,
+								width: document.body.scrollWidth
+							}
+						}, '*');
+					} catch (e) {
+						console.log('Resize message failed');
+					}
+				}
+			}
+
+			// Listen for resize events
+			window.addEventListener('resize', handleResize);
+
+			// Listen for messages from parent (for dynamic configuration)
+			window.addEventListener('message', function (event) {
+				try {
+					if (event.data && event.data.type) {
+						switch (event.data.type) {
+							case 'kline-chart-config':
+								// Handle configuration updates from parent
+								if (event.data.config) {
+									console.log('Received config:', event.data.config);
+									// You can extend this to update chart settings
+								}
+								break;
+							case 'kline-chart-theme':
+								// Handle theme changes
+								if (event.data.theme) {
+									document.documentElement.setAttribute('data-theme', event.data.theme);
+									window.currentTheme = event.data.theme;
+									// Update chart theme if chart exists
+									if (window.chart && window.updateChartTheme) {
+										window.updateChartTheme(event.data.theme);
+									}
+								}
+								break;
+							case 'kline-chart-data':
+								// Handle data updates from parent
+								if (event.data.data && window.updateChartData) {
+									window.updateChartData(event.data.data);
+								}
+								break;
+							case 'kline-chart-watermark':
+								// Handle dynamic watermark updates from parent
+								if (event.data.watermark) {
+									// Temporarily update urlParams for watermark function
+									urlParams.watermark = event.data.watermark;
+									setupWatermark();
+								}
+								break;
+						}
+					}
+				} catch (e) {
+					console.error('Message handling error:', e);
+				}
+			});
+
+			// Expose API for parent window
+			window.klineChartAPI = {
+				updateData: function (data) {
+					if (window.updateChartData) {
+						window.updateChartData(data);
+					}
+				},
+				changePeriod: function (period) {
+					if (window.vm && window.vm.changePeriod) {
+						window.vm.changePeriod(period);
+					}
+				},
+				updateWatermark: function (watermarkText) {
+					// Update the URL params for consistency
+					urlParams.watermark = watermarkText;
+
+					// Set temporary watermark for immediate use
+					window.tempWatermarkText = watermarkText;
+
+					// Update the watermark display
+					setupWatermark();
+				},
+				changeTheme: function (theme) {
+					// Validate theme
+					if (theme !== 'light' && theme !== 'dark' && theme !== 'auto') {
+						console.warn('Invalid theme:', theme);
+						return false;
+					}
+
+					// Apply theme
+					detectAndApplyTheme();
+
+					// Update chart theme if chart exists
+					if (window.chart && window.updateChartTheme) {
+						window.updateChartTheme(theme);
+					}
+
+					return true;
+				},
+				getStatus: function () {
+					return {
+						isLoaded: !!(window.chart),
+						currentPeriod: window.vm ? window.vm.period : null,
+						isInIframe: isInIframe,
+						isMobile: isMobile,
+						currentWatermark: urlParams.watermark || urlParams.wm || 'Loading'
+					};
+				}
+			};
+
+			// Error handling for iframe
+			window.addEventListener('error', function (e) {
+				if (isInIframe) {
+					try {
+						window.parent.postMessage({
+							type: 'kline-chart-error',
+							data: {
+								message: e.message,
+								filename: e.filename,
+								lineno: e.lineno
+							}
+						}, '*');
+					} catch (err) {
+						console.error('Error reporting failed:', err);
+					}
+				}
+			});
+
+		})();
+	</script>
+</body>
+
+</html>

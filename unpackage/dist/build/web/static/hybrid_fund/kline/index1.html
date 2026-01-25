@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport"
+			content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+		<meta charset="utf-8" />
+		<script type="text/javascript" src="klinecharts/dist/klinecharts.min.js"></script>
+		<!-- <script type="text/javascript" src="datalist.js"></script> -->
+	</head>
+	<style>
+		* {
+			padding: 0;
+			margin: 0;
+			box-sizing: border-box;
+		}
+		body {
+			background-color: #fff;
+		}
+		/* 这个下面的css是 产品周期按钮的 */
+		.header {
+			position: relative;
+			/* height: 150px; */
+			/* box-shadow: 0px 10px 8px #FFFFFF; */
+		}
+
+		.times {
+			position: absolute;
+			bottom: 0;
+			width: 100%;
+			display: flex;
+			justify-content: space-between;
+		}
+
+		.times span {
+			width: 16.66%;
+			height: 30px;
+			line-height: 30px;
+			color: #212121;
+			font-size: 12px;
+			text-align: center;
+		}
+
+		.times span.active {
+			position: relative;
+			color: #657EFA;
+			font-weight: 500;
+		}
+
+		/* .times span.active:before {
+			content: " ";
+			position: absolute;
+			bottom: 2px;
+			left: 10%;
+			z-index: 1;
+			width: 80%;
+			height: 3px;
+			background-color: #657EFA;
+			border-radius: 3px;
+		} */
+		
+		.chart{
+		    width: 100vw;
+		    position: relative;
+		    overflow: hidden;
+		}
+		#k-line-chart {
+			width: 100vw;
+			height: 99vw;
+			background-color: #fff;
+		}
+		
+		iframe {
+			width: 100%;
+			height: 100% !important;
+			background-color: #fff;
+		}
+		.tuikuan-showModal{
+		    width: 100%;
+    		height: 100%;
+			background-color: #fff;
+    		position: absolute;
+    		top: 0rpx;
+    		z-index: 100100;
+    		display: flex;
+    		align-items: center;
+    		justify-content: center;
+		}
+		.donut{
+    		display: inline-block;
+    		border: 4px solid rgba(32,32,34,0.1);
+    		border-left-color: #59a782;
+    		border-right-color: #CC3131;
+    		border-radius: 50%;
+    		width: 30px;
+    		height: 30px;
+    		animation:  donut-spin 1.0s linear infinite;
+    	}
+    	
+    	@keyframes donut-spin {
+    		0% {
+    			transform: rotate(0deg);
+    		}
+    		
+    		100% {
+    			transform: rotate(360deg);
+    		}
+    	}
+    	
+	</style>
+	<body>
+		<div id="app" class="root">
+			<div id="" style="">
+				<div class="header" style="padding-top: 30px;">
+					<div class="times" id="interval">
+						<!-- <span @click="changePeriod('5')" :class="period=='5'?'active':''" id="5min">5Min</span> -->
+						<!-- <span @click="changePeriod('15')" :class="period=='15'?'active':''" id="15min">15Min</span> -->
+						<!-- <span @click="changePeriod('30')" :class="period=='30'?'active':''" id="30min">30Min</span> -->
+						<span @click="changePeriod('D')" :class="period=='D'?'active':''"  id="D">Day</span>
+						<span @click="changePeriod('W')" :class="period=='W'?'active':''"  id="W">Week</span>
+						<span @click="changePeriod('M')" :class="period=='M'?'active':''"  id="M">Month</span>
+						<span @click="changePeriod('1')" :class="period=='1'?'active':''"  id="1">Time</span>
+					</div>
+				</div>
+				<div class="chart">
+				     <div v-if="zhezhaoceng" class="tuikuan-showModal">
+				         <div class="donut"></div>
+				     </div>
+					 <div id="k-line-chart"></div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="qs.js"></script>
+		<script type="text/javascript" src="vue.js"></script>
+		<script type="text/javascript" src="axios.js"></script>
+		<script type="text/javascript" src="kline.js"></script>
+		<script type="text/javascript">
+			if (this.lang == "zh-cn") {
+				// document.getElementById('5min').innerText = '5分';
+				// document.getElementById('15min').innerText = '15分';
+				// document.getElementById('30min').innerText = '30分';
+				document.getElementById('D').innerText = '1天';
+				document.getElementById('W').innerText = '1周';
+				document.getElementById('M').innerText = '1月';
+				document.getElementById('1').innerText = '分时';
+			} else if (this.lang == 'IND') {
+				// document.getElementById('5min').innerText = '5शाखा';
+				// document.getElementById('15min').innerText = '15शाखा';
+				// document.getElementById('30min').innerText = '30शाखा';
+				document.getElementById('D').innerText = 'दिन';
+				document.getElementById('W').innerText = 'सप्ताह';
+				document.getElementById('M').innerText = 'महीना';
+				document.getElementById('1').innerText = 'समय साझेदारी';
+			} else {
+				// document.getElementById('5min').innerText = '5Min';
+				// document.getElementById('15min').innerText = '15Min';
+				// document.getElementById('30min').innerText = '30Min';
+				document.getElementById('D').innerText = 'Day';
+				document.getElementById('W').innerText = 'Week';
+				document.getElementById('M').innerText = 'Month';
+				document.getElementById('1').innerText = 'Time';
+			}
+		</script>
+	</body>
+</html>
