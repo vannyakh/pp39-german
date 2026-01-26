@@ -271,7 +271,7 @@ export default {
 					if (res.data.exchange_myr_cny && res.data.exchange_myr_idr) {
 						this.exchangeRate = [
 							{ from: '1 US', rate: res.data.exchange_myr_cny, to: 'US' },
-							{ from: '1 US', rate: res.data.exchange_myr_idr, to: 'CA$' }
+							{ from: '1 US', rate: res.data.exchange_myr_idr, to: 'Euro' }
 						]
 					}
 				}

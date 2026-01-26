@@ -385,8 +385,8 @@ export default {
         // Get flag path based on currency code
         getFlagPath(code) {
             const flagMap = {
-                'USD': '/static/locale/logo/usa.png',
-                'CAD': '/static/locale/logo/canada.png',
+                'USD': '/static/locale/logo/usd.png',
+                'Euro': '/static/locale/logo/usa.png',
                 'USDT': '/static/locale/logo/usdt.png'
             }
             return flagMap[code] || '/static/locale/logo/usa.png'

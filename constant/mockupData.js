@@ -69,13 +69,13 @@ export const quickMenu = [
     //     types: 0,
     //     translationKey: 'forex.title'
     // },
-    {
-        name: 'Loan',
-        icon: "/static/imgs/index/func/loan.png",
-        path: "/pages/loan/index",
-        types: 0,
-        translationKey: 'loan.title'
-    },
+    // {
+    //     name: 'Loan',
+    //     icon: "/static/imgs/index/func/loan.png",
+    //     path: "/pages/loan/index",
+    //     types: 0,
+    //     translationKey: 'loan.title'
+    // },
     // {
     //     name: 'Withdraw',
     //     icon: "/static/imgs/index/func/withdraw.png",

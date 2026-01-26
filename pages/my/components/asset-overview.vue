@@ -329,11 +329,11 @@ export default {
                 // Spot overall
                 spot: { code: 'USD', symbol: '$' },
                 // Spot breakdown
-                spot_cad: { code: 'CAD', symbol: 'C$' },
+                spot_cad: { code: 'CAD', symbol: '€' },
                 spot_us: { code: 'USD', symbol: '$' },
                 spot_usdt: { code: 'USDT', symbol: 'USDT' },
                 // Stock wallets
-                ca: { code: 'CAD', symbol: 'C$' },
+                ca: { code: 'CAD', symbol: '€' },
                 us: { code: 'USD', symbol: '$' },
                 // Forex defaults to USD
                 forex: { code: 'USD', symbol: 'USD' }

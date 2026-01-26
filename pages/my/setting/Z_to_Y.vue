@@ -37,7 +37,7 @@
                     <!-- Show both CAD and USD for Bank tab, USDT for Currency tab -->
                     <template v-if="activeTab == 1">
                         <view class="font-28 weight-bold margin-t-20" :style="{color: theme.textPrimary}">
-                            C$: {{ formatNumber(spot_money_cnd) }}
+                            €: {{ formatNumber(spot_money_cnd) }}
                         </view>
                         <view class="font-28 weight-bold margin-t-10" :style="{color: theme.textPrimary}">
                             USD: {{ formatNumber(spot_money_us) }}

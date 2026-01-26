@@ -47,7 +47,7 @@
 							</view>
 							<view v-else class="width-100b flex direction-column align-center justify-center height-150 radiu-20" :style="{ background: theme.backgroundCard }">
 								<view class="flex align-center justify-center gap-20">
-									<view class="text-center font-28" :style="{ color: theme.textSecondary }">{{$t('Total_Balance')}} (CA$)</view>
+									<view class="text-center font-28" :style="{ color: theme.textSecondary }">{{$t('Total_Balance')}} (€)</view>
                                     <u-icon :name="showPwd1?'eye-fill':'eye-off'" size="25" @click="showPwd1=!showPwd1" :color="theme.neutral__500"></u-icon>
 								</view>
 								<view class="height-50 text-center font-30 bold-font" :style="{ color: theme.textPrimary }">
@@ -145,7 +145,7 @@
 			<view class="height-370 flex flex-direction justify-between width-690 padding-20 radiu-20 popup-content" :style="{ background: theme.backgroundCard }">
 				<view class="height-220 flex direction-column align-center justify-center">
 					<view class="font-30" :style="{ color: theme.textPrimary }">{{$t('position4')}}</view>
-					<view v-if="country==6" class="font-48 margin-t-30" :style="{ color: theme.textPrimary }">CA$ {{Number(win_or_lost).toFixed(3)}}</view>
+					<view v-if="country==6" class="font-48 margin-t-30" :style="{ color: theme.textPrimary }">Euro {{Number(win_or_lost).toFixed(3)}}</view>
 					<view v-if="country==5" class="font-48 margin-t-30" :style="{ color: theme.textPrimary }">US {{Number(win_or_lost).toFixed(3)}}</view>
 					<view class="font-28 margin-t-30" :style="{ color: theme.textSecondary }">{{$t('optional7')}}</view>
 				</view>

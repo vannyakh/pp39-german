@@ -18,7 +18,7 @@ const store = new Vuex.Store({
 		kefuList: [],
         currencyConfig: {
             1: { code: 'USD', symbol: '$', name: 'U.S. Dollar' },
-            2: { code: 'CAD', symbol: 'CA$', name: 'Canadian Dollar' }
+            2: { code: 'Euro', symbol: '€', name: 'Canadian Dollar' }
         },
 
     },
