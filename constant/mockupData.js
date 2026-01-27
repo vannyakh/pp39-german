@@ -7,41 +7,6 @@ export const quickMenu = [
     //     translationKey: 'Favorites'
     // },
     {
-        name: 'Trading',
-        icon: "/static/imgs/index/func/trading.png",
-        path: "/pages/quotation/index",
-        types: 1,
-        translationKey: 'trading8'
-    },
-    {
-        name: 'ETF',
-        icon: "/static/imgs/index/func/etf.png",
-        path: "/pages/statistic/index",
-        types: 0,
-        translationKey: 'statistic.title'
-    },
-    {
-        name: 'Block Trading',
-        icon: "/static/imgs/index/func/bulk.png",
-        path: "/pages/index/bulk/index",
-        types: 0,
-        translationKey: 'trading2'
-    },
-    {
-        name: 'New IPO',
-        icon: "/static/imgs/index/func/ipo.png",
-        path: "/pages/index/new_SG/index",
-        types: 0,
-        translationKey: 'trading3'
-    },
-    // {
-    //     name: 'Offline Trading',
-    //     icon: "/static/imgs/index/func/offline.png",
-    //     path: "/pages/index/unline/index",
-    //     types: 0,
-    //     translationKey: 'trading4'
-    // },
-    {
         name: 'AI Subscribe',
         icon: "/static/imgs/index/func/day_trading.png",
         path: "/pages/AISubscribe/index",
@@ -55,6 +20,58 @@ export const quickMenu = [
         types: 0,
         translationKey: 'invest1'
     },
+    {
+        name: 'Trading',
+        icon: "/static/imgs/index/func/trading.png",
+        path: "/pages/quotation/index",
+        types: 1,
+        translationKey: 'trading8'
+    },
+    {
+        name: 'New IPO',
+        icon: "/static/imgs/index/func/ipo.png",
+        path: "/pages/index/new_SG/index",
+        types: 0,
+        translationKey: 'trading3'
+    },
+    {
+        name: 'Thematic Trading',
+        icon: "/static/imgs/index/func/trading.png",
+        path: "/pages/index/thematic-trade",
+        types: 0,
+        translationKey: 'thematic_trading'
+    }, {
+        name: 'Online Service',
+        icon: "/static/imgs/index/func/support.png",
+        path: "/pages/index/service/index",
+        types: 0,
+        translationKey: 'online_service'
+    },
+
+    // {
+    //     name: 'ETF',
+    //     icon: "/static/imgs/index/func/etf.png",
+    //     path: "/pages/statistic/index",
+    //     types: 0,
+    //     translationKey: 'statistic.title'
+    // },
+    // {
+    //     name: 'Block Trading',
+    //     icon: "/static/imgs/index/func/bulk.png",
+    //     path: "/pages/index/bulk/index",
+    //     types: 0,
+    //     translationKey: 'trading2'
+    // },
+
+    // {
+    //     name: 'Offline Trading',
+    //     icon: "/static/imgs/index/func/offline.png",
+    //     path: "/pages/index/unline/index",
+    //     types: 0,
+    //     translationKey: 'trading4'
+    // },
+
+
     // {
     //     name: 'Fund',
     //     icon: "/static/imgs/index/func/fund.png",
@@ -83,4 +100,4 @@ export const quickMenu = [
     //     types: 0,
     //     translationKey: 'trading7'
     // }
-    ]
+]

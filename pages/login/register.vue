@@ -1,48 +1,92 @@
 <template>
     <view class="register-page min-height-screen-teb">
         <!-- Background with abstract elements -->
-        <view class="background-section" :style="{ background: backgroundGradient }">
+        <view
+            class="background-section"
+            :style="{ background: backgroundGradient }"
+        >
             <view class="abstract-elements">
-                <view class="candlestick-pattern" :style="{ background: backgroundGradient }"></view>
+                <view
+                    class="candlestick-pattern"
+                    :style="{ background: backgroundGradient }"
+                ></view>
                 <view class="glow-circle circle-1"></view>
                 <view class="glow-circle circle-2"></view>
                 <view class="glow-circle circle-3"></view>
             </view>
             <app-nav blur>
                 <template #right>
-                    <view class="language" @click="router.push('/pages/my/lang')">
+                    <view
+                        class="language"
+                        @click="router.push('/pages/my/lang')"
+                    >
                         <image :src="$t('logo')" class="lang-logo"></image>
-                        <text class="lang-text">{{ $t('language') }}</text>
+                        <text class="lang-text">{{ $t("language") }}</text>
                     </view>
                 </template>
             </app-nav>
 
-
             <!-- Logo Section -->
             <view class="logo-container">
-                <view class="logo-circle" :style="{ background: theme.backgroundCard, boxShadow: '0 8rpx 16rpx rgba(0, 0, 0, 0.1)' }">
-                    <image class="logo-image" :src="$store.state.logo" mode="aspectFill"></image>
+                <view
+                    class="logo-circle"
+                    :style="{
+                        background: theme.backgroundCard,
+                        boxShadow: '0 8rpx 16rpx rgba(0, 0, 0, 0.1)',
+                    }"
+                >
+                    <image
+                        class="logo-image"
+                        :src="$store.state.logo"
+                        mode="aspectFill"
+                    ></image>
                 </view>
             </view>
         </view>
 
         <!-- Register Form Card -->
-        <view class="register-card" :style="{ background: theme.backgroundPrimary }">
+        <view
+            class="register-card"
+            :style="{ background: theme.backgroundPrimary }"
+        >
             <view class="card-header">
-                <text class="card-title" :style="{ color: theme.textPrimary }">{{$t('login9')}}</text>
+                <text
+                    class="card-title"
+                    :style="{ color: theme.textPrimary }"
+                    >{{ $t("login9") }}</text
+                >
             </view>
 
             <!-- Tab Switcher -->
-            <view class="tab-switcher" :style="{ background: theme.backgroundTertiary }">
+            <view
+                class="tab-switcher"
+                :style="{ background: theme.backgroundTertiary }"
+            >
                 <view
                     class="tab-item"
                     :class="{ 'tab-active': registerType === 'phone' }"
                     :style="registerType === 'phone' ? tabActiveStyle : {}"
                     @click="switchRegisterType('phone')"
                 >
-                    <u-icon name="phone" size="20" :color="registerType === 'phone' ? theme.primary__light : theme.textTertiary"></u-icon>
-                    <text class="tab-text" :style="{ color: registerType === 'phone' ? theme.primary__light : theme.textTertiary }">
-                        {{ $t('register.phone') }}
+                    <u-icon
+                        name="phone"
+                        size="20"
+                        :color="
+                            registerType === 'phone'
+                                ? theme.primary__light
+                                : theme.textTertiary
+                        "
+                    ></u-icon>
+                    <text
+                        class="tab-text"
+                        :style="{
+                            color:
+                                registerType === 'phone'
+                                    ? theme.primary__light
+                                    : theme.textTertiary,
+                        }"
+                    >
+                        {{ $t("register.phone") }}
                     </text>
                 </view>
                 <view
@@ -51,21 +95,48 @@
                     :style="registerType === 'email' ? tabActiveStyle : {}"
                     @click="switchRegisterType('email')"
                 >
-                    <u-icon name="email" size="20" :color="registerType === 'email' ? theme.primary__light : theme.textTertiary"></u-icon>
-                    <text class="tab-text" :style="{ color: registerType === 'email' ? theme.primary__light : theme.textTertiary }">
-                        {{ $t('register.email') }}
+                    <u-icon
+                        name="email"
+                        size="20"
+                        :color="
+                            registerType === 'email'
+                                ? theme.primary__light
+                                : theme.textTertiary
+                        "
+                    ></u-icon>
+                    <text
+                        class="tab-text"
+                        :style="{
+                            color:
+                                registerType === 'email'
+                                    ? theme.primary__light
+                                    : theme.textTertiary,
+                        }"
+                    >
+                        {{ $t("register.email") }}
                     </text>
                 </view>
             </view>
 
             <!-- Mobile Number Input (Phone Tab) -->
             <view v-if="registerType === 'phone'" class="input-group">
-                <view class="input-container" :style="{ background: theme.backgroundTertiary }">
+                <view
+                    class="input-container"
+                    :style="{ background: theme.backgroundTertiary }"
+                >
                     <view class="input-icon">
                         <u-icon name="phone" size="20"></u-icon>
                     </view>
-                    <view class="country-selector" @click="countryType=true" :style="{ background: theme.primary__50 }">
-                        <text class="country-code" :style="{ color: theme.primary__light }">+{{seleCountry.value}}</text>
+                    <view
+                        class="country-selector"
+                        @click="countryType = true"
+                        :style="{ background: theme.primary__50 }"
+                    >
+                        <text
+                            class="country-code"
+                            :style="{ color: theme.primary__light }"
+                            >+{{ seleCountry.value }}</text
+                        >
                         <u-icon name="arrow-down" size="12"></u-icon>
                     </view>
                     <input
@@ -77,7 +148,11 @@
                         placeholder-class="input-placeholder"
                         :style="{ color: theme.textPrimary }"
                     />
-                    <view v-if="showClearIcon" class="clear-icon" @click="clearIcon">
+                    <view
+                        v-if="showClearIcon"
+                        class="clear-icon"
+                        @click="clearIcon"
+                    >
                         <u-icon name="close" size="16"></u-icon>
                     </view>
                 </view>
@@ -85,7 +160,10 @@
 
             <!-- Email Input (Email Tab) -->
             <view v-if="registerType === 'email'" class="input-group">
-                <view class="input-container" :style="{ background: theme.backgroundTertiary }">
+                <view
+                    class="input-container"
+                    :style="{ background: theme.backgroundTertiary }"
+                >
                     <view class="input-icon">
                         <u-icon name="email" size="20"></u-icon>
                     </view>
@@ -98,15 +176,22 @@
                         placeholder-class="input-placeholder"
                         :style="{ color: theme.textPrimary }"
                     />
-                    <view v-if="showClearIconEmail" class="clear-icon" @click="clearIconEmail">
+                    <view
+                        v-if="showClearIconEmail"
+                        class="clear-icon"
+                        @click="clearIconEmail"
+                    >
                         <u-icon name="close" size="16"></u-icon>
                     </view>
                 </view>
             </view>
 
             <!-- OTP Code Input (Email only) -->
-            <view v-if="registerType === 'email'" class="input-group">
-                <view class="input-container" :style="{ background: theme.backgroundTertiary }">
+            <!-- <view v-if="registerType === 'email'" class="input-group">
+                <view
+                    class="input-container"
+                    :style="{ background: theme.backgroundTertiary }"
+                >
                     <view class="input-icon">
                         <u-icon name="scan" size="20"></u-icon>
                     </view>
@@ -119,15 +204,30 @@
                         placeholder-class="input-placeholder"
                         :style="{ color: theme.textPrimary }"
                     />
-                    <view class="otp-button" @click="cutTime" :style="{ background: timeFlag ? theme.primary__light : theme.neutral__400 }">
-                        <text class="otp-text" :style="{ color: theme.white }">{{ codeText }}</text>
+                    <view
+                        class="otp-button"
+                        @click="cutTime"
+                        :style="{
+                            background: timeFlag
+                                ? theme.primary__light
+                                : theme.neutral__400,
+                        }"
+                    >
+                        <text
+                            class="otp-text"
+                            :style="{ color: theme.white }"
+                            >{{ codeText }}</text
+                        >
                     </view>
                 </view>
-            </view>
+            </view> -->
 
             <!-- Password Input -->
             <view class="input-group">
-                <view class="input-container" :style="{ background: theme.backgroundTertiary }">
+                <view
+                    class="input-container"
+                    :style="{ background: theme.backgroundTertiary }"
+                >
                     <view class="input-icon">
                         <u-icon name="lock" size="20"></u-icon>
                     </view>
@@ -140,15 +240,24 @@
                         placeholder-class="input-placeholder"
                         :style="{ color: theme.textPrimary }"
                     />
-                    <view class="password-toggle" @click="showPassword=!showPassword">
-                        <u-icon :name="showPassword?'eye-off':'eye-fill'" size="20"></u-icon>
+                    <view
+                        class="password-toggle"
+                        @click="showPassword = !showPassword"
+                    >
+                        <u-icon
+                            :name="showPassword ? 'eye-off' : 'eye-fill'"
+                            size="20"
+                        ></u-icon>
                     </view>
                 </view>
             </view>
 
             <!-- Confirm Password Input -->
             <view class="input-group">
-                <view class="input-container" :style="{ background: theme.backgroundTertiary }">
+                <view
+                    class="input-container"
+                    :style="{ background: theme.backgroundTertiary }"
+                >
                     <view class="input-icon">
                         <u-icon name="lock" size="20"></u-icon>
                     </view>
@@ -161,15 +270,24 @@
                         placeholder-class="input-placeholder"
                         :style="{ color: theme.textPrimary }"
                     />
-                    <view class="password-toggle" @click="showPassword1=!showPassword1">
-                        <u-icon :name="showPassword1?'eye-off':'eye-fill'" size="20"></u-icon>
+                    <view
+                        class="password-toggle"
+                        @click="showPassword1 = !showPassword1"
+                    >
+                        <u-icon
+                            :name="showPassword1 ? 'eye-off' : 'eye-fill'"
+                            size="20"
+                        ></u-icon>
                     </view>
                 </view>
             </view>
 
             <!-- Referral Code Input -->
             <view class="input-group">
-                <view class="input-container" :style="{ background: theme.backgroundTertiary }">
+                <view
+                    class="input-container"
+                    :style="{ background: theme.backgroundTertiary }"
+                >
                     <view class="input-icon">
                         <u-icon name="gift" size="20"></u-icon>
                     </view>
@@ -182,7 +300,11 @@
                         placeholder-class="input-placeholder"
                         :style="{ color: theme.textPrimary }"
                     />
-                    <view v-if="showClearIcon1" class="clear-icon" @click="clearIcon1">
+                    <view
+                        v-if="showClearIcon1"
+                        class="clear-icon"
+                        @click="clearIcon1"
+                    >
                         <u-icon name="close" size="16"></u-icon>
                     </view>
                 </view>
@@ -193,10 +315,12 @@
                 <button
                     @click="getRegister"
                     :disabled="isDisabled"
-                    :class="['register-button', {'disabled': isDisabled}]"
+                    :class="['register-button', { disabled: isDisabled }]"
                     :style="getButtonStyle()"
                 >
-                    <text class="button-text" :style="{ color: theme.white }">{{$t('login21')}}</text>
+                    <text class="button-text" :style="{ color: theme.white }">{{
+                        $t("login21")
+                    }}</text>
                 </button>
             </view>
         </view>
@@ -214,17 +338,48 @@
                     v-for="(country, index) in rangelist"
                     :key="index"
                     class="country-item"
-                    :class="{ 'country-item--active': seleCountry && seleCountry.country_code === country.country_code }"
+                    :class="{
+                        'country-item--active':
+                            seleCountry &&
+                            seleCountry.country_code === country.country_code,
+                    }"
                     @click="selectCountry(country)"
                     :style="{
-						background: seleCountry && seleCountry.country_code === country.country_code ? theme.primary__50 : 'transparent'
-					}"
+                        background:
+                            seleCountry &&
+                            seleCountry.country_code === country.country_code
+                                ? theme.primary__50
+                                : 'transparent',
+                    }"
                 >
-                    <image v-if="country.image" class="country-flag" :src="country.image" mode="aspectFit"></image>
-                    <text class="country-name" :style="{ color: theme.textPrimary }">{{ country.name }}</text>
-                    <text class="country-code-text" :style="{ color: theme.textSecondary }">+{{ country.country_code }}</text>
-                    <view v-if="seleCountry && seleCountry.country_code === country.country_code" class="country-check">
-                        <u-icon name="checkmark" size="20" :color="theme.primary__light"></u-icon>
+                    <image
+                        v-if="country.image"
+                        class="country-flag"
+                        :src="country.image"
+                        mode="aspectFit"
+                    ></image>
+                    <text
+                        class="country-name"
+                        :style="{ color: theme.textPrimary }"
+                        >{{ country.name }}</text
+                    >
+                    <text
+                        class="country-code-text"
+                        :style="{ color: theme.textSecondary }"
+                        >+{{ country.country_code }}</text
+                    >
+                    <view
+                        v-if="
+                            seleCountry &&
+                            seleCountry.country_code === country.country_code
+                        "
+                        class="country-check"
+                    >
+                        <u-icon
+                            name="checkmark"
+                            size="20"
+                            :color="theme.primary__light"
+                        ></u-icon>
                     </view>
                 </view>
             </view>
@@ -236,268 +391,302 @@
 export default {
     data() {
         return {
-            registerType: 'phone', // 'phone' or 'email'
-            countryType:false,
-            rangelist:[],
-            seleCountry:'',
-            mobile:'',
-            email:'',
-            password:'',
-            password2:'',
-            pay_pwd:'',
-            code:'',
-            referral_code:'',
+            registerType: "phone", // 'phone' or 'email'
+            countryType: false,
+            rangelist: [],
+            seleCountry: "",
+            mobile: "",
+            email: "",
+            password: "",
+            password2: "",
+            pay_pwd: "",
+            code: "",
+            referral_code: "",
             flag: true,
-            time: '',
+            time: "",
             timeFlag: true,
             showClearIcon: false,
             showClearIcon1: false,
             showClearIconEmail: false,
             showPassword: true,
-            showPassword1: true
-        }
+            showPassword1: true,
+        };
     },
     computed: {
         codeText() {
             if (this.time > 0) {
-                return this.time + " s"
+                return this.time + " s";
             } else {
-                return this.$t('login25')
+                return this.$t("login25");
             }
         },
-        theme(){
-            return this.$store.getters.theme
+        theme() {
+            return this.$store.getters.theme;
         },
-        isDisabled(){
-            if (this.registerType === 'phone') {
-                return this.mobile==''||this.password==''||this.password2==''
+        isDisabled() {
+            if (this.registerType === "phone") {
+                return (
+                    this.mobile == "" ||
+                    this.password == "" ||
+                    this.password2 == ""
+                );
             } else {
-                return this.email==''||this.code==''||this.password==''||this.password2==''
+                return (
+                    this.email == "" ||
+                    this.code == "" ||
+                    this.password == "" ||
+                    this.password2 == ""
+                );
             }
         },
         tabActiveStyle() {
             return {
                 background: this.theme.backgroundPrimary,
-                boxShadow: '0 2rpx 8rpx rgba(0, 0, 0, 0.1)'
-            }
+                boxShadow: "0 2rpx 8rpx rgba(0, 0, 0, 0.1)",
+            };
         },
         backgroundGradient() {
             // Handle gradient - primary might be a gradient, so extract solid color
-            const primaryColor = this.theme.primary__light
-            const secondaryColor = this.theme.secondary
+            const primaryColor = this.theme.primary__light;
+            const secondaryColor = this.theme.secondary;
             // If primary is a gradient, use it directly, otherwise create gradient
-            if (this.theme.primary && this.theme.primary.includes('gradient')) {
-                return this.theme.primary.replace('137deg', '90deg')
+            if (this.theme.primary && this.theme.primary.includes("gradient")) {
+                return this.theme.primary.replace("137deg", "90deg");
             }
-            return `linear-gradient(90deg, ${primaryColor} 0%, ${secondaryColor} 100%)`
-        }
+            return `linear-gradient(90deg, ${primaryColor} 0%, ${secondaryColor} 100%)`;
+        },
     },
     onLoad() {
-        getApp().globalData.clearAllIntervals()
-        this.loadCountries()
+        getApp().globalData.clearAllIntervals();
+        this.loadCountries();
     },
     methods: {
         async loadCountries() {
             try {
-                const res = await this.post('/index/country')
-                if (res && res.code === 1 && res.data && Array.isArray(res.data)) {
+                const res = await this.post("/index/country");
+                if (
+                    res &&
+                    res.code === 1 &&
+                    res.data &&
+                    Array.isArray(res.data)
+                ) {
                     // Map API response to expected format: add 'value' property from 'country_code'
-                    this.rangelist = res.data.map(country => ({
+                    this.rangelist = res.data.map((country) => ({
                         ...country,
-                        value: country.country_code
-                    }))
-                    if (this.rangelist.length > 0) {
-                        // Find country with active = 1, otherwise use first country
-                        const activeCountry = this.rangelist.find(country => country.active === 1)
-                        this.seleCountry = activeCountry || this.rangelist[0]
-                    }
+                        value: country.country_code,
+                    }));
+
+                    this.rangelist.map((country, index) => {
+                        if (country.country_code == "49") {
+                            const activeCountry = country;
+                            this.seleCountry =
+                                activeCountry || this.rangelist[index];
+                        }
+                    });
+
+                    // if (this.rangelist.length > 0) {
+                    //     // Find country with active = 1, otherwise use first country
+                    //     const activeCountry = this.rangelist.find(country => country.active === 1)
+                    //     this.seleCountry = activeCountry || this.rangelist[0]
+                    // }
                 } else {
-                    console.error('Failed to load countries:', res)
+                    console.error("Failed to load countries:", res);
                 }
             } catch (err) {
-                console.error('Error loading countries:', err)
+                console.error("Error loading countries:", err);
             }
         },
         switchRegisterType(type) {
-            this.registerType = type
+            this.registerType = type;
             // Clear inputs when switching
-            if (type === 'phone') {
-                this.email = ''
-                this.code = ''
-                this.showClearIconEmail = false
+            if (type === "phone") {
+                this.email = "";
+                this.code = "";
+                this.showClearIconEmail = false;
             } else {
-                this.mobile = ''
-                this.showClearIcon = false
+                this.mobile = "";
+                this.showClearIcon = false;
             }
         },
         getButtonStyle() {
             if (this.isDisabled) {
                 return {
                     background: this.theme.neutral__400,
-                    boxShadow: 'none'
-                }
+                    boxShadow: "none",
+                };
             }
-            const primaryColor = this.theme.primary__light
-            const secondaryColor = this.theme.secondary
+            const primaryColor = this.theme.primary__light;
+            const secondaryColor = this.theme.secondary;
             // If primary is a gradient, use it directly, otherwise create gradient
-            if (this.theme.primary && this.theme.primary.includes('gradient')) {
+            if (this.theme.primary && this.theme.primary.includes("gradient")) {
                 return {
-                    background: this.theme.primary.replace('137deg', '90deg'),
-                    boxShadow: '0 4rpx 20rpx rgba(244, 118, 86, 0.3)'
-                }
+                    background: this.theme.primary.replace("137deg", "90deg"),
+                    boxShadow: "0 4rpx 20rpx rgba(244, 118, 86, 0.3)",
+                };
             }
             return {
                 background: `linear-gradient(90deg, ${primaryColor} 0%, ${secondaryColor} 100%)`,
-                boxShadow: '0 4rpx 20rpx rgba(244, 118, 86, 0.3)'
-            }
+                boxShadow: "0 4rpx 20rpx rgba(244, 118, 86, 0.3)",
+            };
         },
         clearInput: function (event) {
-            this.mobile = event.detail.value
+            this.mobile = event.detail.value;
             if (event.detail.value.length > 0) {
-                this.showClearIcon = true
+                this.showClearIcon = true;
             } else {
-                this.showClearIcon = false
+                this.showClearIcon = false;
             }
         },
         clearIcon: function () {
-            this.mobile = ''
-            this.showClearIcon = false
+            this.mobile = "";
+            this.showClearIcon = false;
         },
         clearInputEmail: function (event) {
-            this.email = event.detail.value
+            this.email = event.detail.value;
             if (event.detail.value.length > 0) {
-                this.showClearIconEmail = true
+                this.showClearIconEmail = true;
             } else {
-                this.showClearIconEmail = false
+                this.showClearIconEmail = false;
             }
         },
         clearIconEmail: function () {
-            this.email = ''
-            this.showClearIconEmail = false
+            this.email = "";
+            this.showClearIconEmail = false;
         },
         clearInput1: function (event) {
-            this.referral_code = event.detail.value
+            this.referral_code = event.detail.value;
             if (event.detail.value.length > 0) {
-                this.showClearIcon1 = true
+                this.showClearIcon1 = true;
             } else {
-                this.showClearIcon1 = false
+                this.showClearIcon1 = false;
             }
         },
         clearIcon1: function () {
-            this.referral_code = ''
-            this.showClearIcon1 = false
+            this.referral_code = "";
+            this.showClearIcon1 = false;
         },
-        selectCountry(country){
-            this.seleCountry = country
-            this.countryType = false
+        selectCountry(country) {
+            this.seleCountry = country;
+            this.countryType = false;
         },
         getRegister() {
-            if (!this.flag) return
+            if (!this.flag) return;
 
             // Validate based on register type
-            if (this.registerType === 'phone') {
-                if (this.mobile=='') return this.tos(this.$t('login10'))
+            if (this.registerType === "phone") {
+                if (this.mobile == "") return this.tos(this.$t("login10"));
             } else {
-                if (this.email=='') return this.tos(this.$t('register.email_required'))
-                if (this.code=='') return this.tos(this.$t('login12'))
+                if (this.email == "")
+                    return this.tos(this.$t("register.email_required"));
+                // if (this.code == "") return this.tos(this.$t("login12"));
                 // Basic email validation
-                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                 if (!emailRegex.test(this.email)) {
-                    return this.tos(this.$t('register.email_invalid'))
+                    return this.tos(this.$t("register.email_invalid"));
                 }
             }
 
-            if (this.password == '') return this.tos(this.$t('login14'))
-            if (this.password != this.password2) return this.tos(this.$t('login26'))
+            if (this.password == "") return this.tos(this.$t("login14"));
+            if (this.password != this.password2)
+                return this.tos(this.$t("login26"));
 
-            this.flag = false
+            this.flag = false;
 
             // Prepare register data based on type
             const registerData = {
                 password: this.password2,
-                referral_code: this.referral_code
-            }
+                referral_code: this.referral_code,
+            };
 
-            if (this.registerType === 'phone') {
-                registerData.m_prefix = this.seleCountry.value
-                registerData.mobile = this.mobile
+            if (this.registerType === "phone") {
+                registerData.m_prefix = this.seleCountry.value;
+                registerData.mobile = this.mobile;
             } else {
-                registerData.email = this.email
-                registerData.code = this.code
+                registerData.email = this.email;
+                registerData.code = this.code;
             }
 
-            this.post('/user/register', registerData, true).then(res => {
-                this.flag = true
+            this.post("/user/register", registerData, true).then((res) => {
+                this.flag = true;
                 if (res.code == 1) {
-                    this.tos(res.msg)
-                    setTimeout(()=>{
-                        uni.navigateBack()
-                    },500)
+                    this.tos(res.msg);
+                    setTimeout(() => {
+                        uni.navigateBack();
+                    }, 500);
                 }
-            })
+            });
         },
         // 发送验证码
         cutTime() {
-            if (!this.timeFlag) return
-            if (this.registerType === 'phone') {
-                if (this.mobile=='') return this.tos(this.$t('login10'))
-                this.timeFlag = false
-                this.post('/sms/send', {
-                    m_prefix:this.seleCountry.value,
-                    mobile: this.mobile,
-                    event: "register",
-                },true).then(res => {
+            if (!this.timeFlag) return;
+            if (this.registerType === "phone") {
+                if (this.mobile == "") return this.tos(this.$t("login10"));
+                this.timeFlag = false;
+                this.post(
+                    "/sms/send",
+                    {
+                        m_prefix: this.seleCountry.value,
+                        mobile: this.mobile,
+                        event: "register",
+                    },
+                    true,
+                ).then((res) => {
                     if (res.code == 1) {
-                        this.tos(res.msg)
-                        this.time = 60
-                        var that = this
+                        this.tos(res.msg);
+                        this.time = 60;
+                        var that = this;
                         let timeName = setInterval(() => {
                             if (that.time > 0) {
-                                that.time--
+                                that.time--;
                             } else {
-                                that.time = 0
-                                that.timeFlag = true
-                                clearInterval(timeName)
+                                that.time = 0;
+                                that.timeFlag = true;
+                                clearInterval(timeName);
                             }
-                        }, 1000)
+                        }, 1000);
                     } else {
-                        this.timeFlag = true
+                        this.timeFlag = true;
                     }
-                })
+                });
             } else {
                 // Email registration - send OTP to email
-                if (this.email=='') return this.tos(this.$t('register.email_required'))
+                if (this.email == "")
+                    return this.tos(this.$t("register.email_required"));
                 // Basic email validation
-                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                 if (!emailRegex.test(this.email)) {
-                    return this.tos(this.$t('register.email_invalid'))
+                    return this.tos(this.$t("register.email_invalid"));
                 }
-                this.timeFlag = false
-                this.post('/ems/send', {
-                    email: this.email,
-                    event: "register",
-                },true).then(res => {
+                this.timeFlag = false;
+                this.post(
+                    "/ems/send",
+                    {
+                        email: this.email,
+                        event: "register",
+                    },
+                    true,
+                ).then((res) => {
                     if (res.code == 1) {
-                        this.tos(res.msg)
-                        this.time = 60
-                        var that = this
+                        this.tos(res.msg);
+                        this.time = 60;
+                        var that = this;
                         let timeName = setInterval(() => {
                             if (that.time > 0) {
-                                that.time--
+                                that.time--;
                             } else {
-                                that.time = 0
-                                that.timeFlag = true
-                                clearInterval(timeName)
+                                that.time = 0;
+                                that.timeFlag = true;
+                                clearInterval(timeName);
                             }
-                        }, 1000)
+                        }, 1000);
                     } else {
-                        this.timeFlag = true
+                        this.timeFlag = true;
                     }
-                })
+                });
             }
         },
-    }
-}
+    },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -538,7 +727,11 @@ export default {
 .glow-circle {
     position: absolute;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 70%);
+    background: radial-gradient(
+        circle,
+        rgba(255, 255, 255, 0.2) 0%,
+        transparent 70%
+    );
     animation: float 6s ease-in-out infinite;
 }
 
@@ -567,8 +760,13 @@ export default {
 }
 
 @keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-20px); }
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
 }
 
 .logo-container {
@@ -629,7 +827,6 @@ export default {
     transition: all 0.3s ease;
 }
 
-
 .input-icon {
     margin-right: 24rpx;
     display: flex;
@@ -662,7 +859,8 @@ export default {
     color: #999;
 }
 
-.clear-icon, .password-toggle {
+.clear-icon,
+.password-toggle {
     padding: 8rpx;
     display: flex;
     align-items: center;
@@ -721,7 +919,7 @@ export default {
     font-weight: 600;
 }
 
-.language{
+.language {
     display: flex;
     align-items: center;
     gap: 8rpx;
