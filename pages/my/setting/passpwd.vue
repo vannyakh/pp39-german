@@ -12,7 +12,7 @@
 						<text class="font-30  margin-w-10" :style="{color: theme.textPrimary}">+{{m_prefix}}</text>
 						<i class="cuIcon-unfold"></i>
 					</view> -->
-					<input class="flex-1 height-76 line-height-76 font-28" :style="{color: theme.textPrimary}" disabled="true" type="number" v-model="mobile" @input="clearInput" maxlength="10" :placeholder="$t('login10')" placeholder-class="input-placeholder"/>
+					<input class="flex-1 height-76 line-height-76 font-28" :style="{color: theme.textPrimary}" disabled="true" type="number" v-model="mobile" @input="clearInput"  :placeholder="$t('login10')" placeholder-class="input-placeholder"/>
 			        <u-icon v-if="showClearIcon" name="close" size="18" @click="clearIcon" :color="theme.primary__500"></u-icon>
 				</view>
 			</view>
