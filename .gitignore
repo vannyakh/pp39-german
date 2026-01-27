@@ -9,3 +9,5 @@ cache/*
 release/apk
 release/ipa
 cache/*
+node_modules
+node_modules/*
