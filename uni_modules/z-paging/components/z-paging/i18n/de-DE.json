@@ -1,0 +1,23 @@
+{	
+	"zp.refresher.default": "Zum Aktualisieren nach unten ziehen",
+	"zp.refresher.pulling": "Loslassen zum Aktualisieren",
+	"zp.refresher.refreshing": "Wird aktualisiert...",
+	"zp.refresher.complete": "Aktualisierung erfolgreich",
+	"zp.refresher.f2": "Aktualisieren, um 2f zu aktivieren",
+	
+	"zp.loadingMore.default": "Klicken, um mehr zu laden",
+	"zp.loadingMore.loading": "Wird geladen...",
+	"zp.loadingMore.noMore": "Keine weiteren Daten",
+	"zp.loadingMore.fail": "Laden fehlgeschlagen, klicken zum erneuten Laden",
+	
+	"zp.emptyView.title": "Keine Daten",
+	"zp.emptyView.reload": "Neu laden",
+	"zp.emptyView.error": "Entschuldigung, Laden fehlgeschlagen",
+	
+	"zp.refresherUpdateTime.title": "Letzte Aktualisierung: ",
+	"zp.refresherUpdateTime.none": "Keine",
+	"zp.refresherUpdateTime.today": "Heute",
+	"zp.refresherUpdateTime.yesterday": "Gestern",
+	
+	"zp.systemLoading.title": "Wird geladen..."
+}

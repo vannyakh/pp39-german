@@ -1,0 +1,22 @@
+lockfileVersion: '9.0'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
+importers:
+
+  .:
+    dependencies:
+      klinecharts:
+        specifier: ^8.6.1
+        version: 8.6.3
+
+packages:
+
+  klinecharts@8.6.3:
+    resolution: {integrity: sha512-hGDtWiMNywEDneZFmt+vZ6tOYutCDWV5FPBcXcn7L8kGwe73Q5yJayk8UzP9pIQSBWyxswWIySKh/BVFA6GhuQ==}
+
+snapshots:
+
+  klinecharts@8.6.3: {}

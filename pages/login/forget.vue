@@ -103,8 +103,8 @@
 				</view>
 			</view>
 
-			<!-- Verification Code Input -->
-			<view class="input-group">
+			<!-- Verification Code Input (Email only) -->
+			<view v-if="resetType === 'email'" class="input-group">
 				<view class="input-container" :style="{ background: theme.backgroundTertiary }">
 					<view class="input-icon">
 						<u-icon name="coupon" size="20" :color="theme.neutral__400"></u-icon>
@@ -280,6 +280,7 @@
 				// Clear inputs when switching
 				if (type === 'phone') {
 					this.email = ''
+					this.code = ''
 					this.showClearIconEmail = false
 				} else {
 					this.mobile = ''
@@ -353,19 +354,19 @@
 					if (!emailRegex.test(this.email)) {
 						return this.tos(this.$t('register.email_invalid'))
 					}
+					if (this.code == '') return this.tos(this.$t('login12'))
 				}
-				if (this.code == '') return this.tos(this.$t('login12'))
 				if (this.pwd1 == '') return this.tos(this.$t('login14'))
 				if (this.pwd1 != this.pwd2) return this.tos(this.$t('login26'))
 				this.flag = false
 				const resetData = {
 					newpassword: this.pwd2,
-					captcha: this.code,
 				}
 				if (this.resetType === 'phone') {
 					resetData.mobile = this.mobile
 				} else {
 					resetData.email = this.email
+					resetData.captcha = this.code
 				}
 				this.post('/user/resetpwd', resetData, true).then(res => {
 					this.flag = true
