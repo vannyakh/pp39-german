@@ -64,6 +64,12 @@
 						value: 'Français',
 						language: 'fr',
 						description: 'Français (France)'
+					},
+					{
+						imgUrl: '/static/locale/logo/de.png',
+						value: 'Deutschland',
+						language: 'de-DE',
+						description: 'Deutschland (Germany)'
 					}
 				],
 			};

@@ -73,7 +73,6 @@
                         type="number"
                         v-model="mobile"
                         @input="clearInput"
-                        maxlength="10"
                         :placeholder="$t('login10')"
                         placeholder-class="input-placeholder"
                         :style="{ color: theme.textPrimary }"
@@ -105,8 +104,8 @@
                 </view>
             </view>
 
-            <!-- OTP Code Input -->
-            <view class="input-group">
+            <!-- OTP Code Input (Email only) -->
+            <view v-if="registerType === 'email'" class="input-group">
                 <view class="input-container" :style="{ background: theme.backgroundTertiary }">
                     <view class="input-icon">
                         <u-icon name="scan" size="20"></u-icon>
@@ -271,7 +270,7 @@ export default {
         },
         isDisabled(){
             if (this.registerType === 'phone') {
-                return this.mobile==''||this.code==''||this.password==''||this.password2==''
+                return this.mobile==''||this.password==''||this.password2==''
             } else {
                 return this.email==''||this.code==''||this.password==''||this.password2==''
             }
@@ -324,6 +323,7 @@ export default {
             // Clear inputs when switching
             if (type === 'phone') {
                 this.email = ''
+                this.code = ''
                 this.showClearIconEmail = false
             } else {
                 this.mobile = ''
@@ -397,7 +397,6 @@ export default {
             // Validate based on register type
             if (this.registerType === 'phone') {
                 if (this.mobile=='') return this.tos(this.$t('login10'))
-                if (this.code=='') return this.tos(this.$t('login12'))
             } else {
                 if (this.email=='') return this.tos(this.$t('register.email_required'))
                 if (this.code=='') return this.tos(this.$t('login12'))
@@ -422,7 +421,6 @@ export default {
             if (this.registerType === 'phone') {
                 registerData.m_prefix = this.seleCountry.value
                 registerData.mobile = this.mobile
-                registerData.code = this.code
             } else {
                 registerData.email = this.email
                 registerData.code = this.code
