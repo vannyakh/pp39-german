@@ -433,7 +433,7 @@ export default {
             } else {
                 return (
                     this.email == "" ||
-                    this.code == "" ||
+                    //this.code == "" ||
                     this.password == "" ||
                     this.password2 == ""
                 );
