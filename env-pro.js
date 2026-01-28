@@ -10,7 +10,7 @@ export default {
 	VUE_APP_WSS_URL: 'wss://49.51.142.55:6688',
 	VUE_APP_WS_FOREX_URL: 'wss://49.51.142.55:2346',
 	VUE_APP_FOREX_KLINE_URL: "https://app.galaxyenv.com",
-	VUE_APP_LANG: 'en',
+	VUE_APP_LANG: 'de-DE',
 	VUE_APP_VERSION: '1.0.0',
 
 }

@@ -219,7 +219,7 @@ export default {
 			return this.menuList.filter(item => {
 				console.log(item);
 				console.log(this.userinfo);
-				
+
 				if (item.name === 'KYC' && this.userinfo.is_auth) {
 					return false
 				}
@@ -243,7 +243,7 @@ export default {
 			if (!item.path) return
 
 			console.log(item);
-			
+
 			if (item.types === 1) {
 				this.router.goTabBar(item.path)
 			} else {
@@ -397,7 +397,7 @@ export default {
     }
 	.menu-grid {
 		display: grid;
-		grid-template-columns: repeat(4, 1fr);
+		grid-template-columns: repeat(3, 1fr);
 		grid-template-rows: repeat(2, 1fr);
 		gap: 12rpx;
 		border-radius: 32rpx;

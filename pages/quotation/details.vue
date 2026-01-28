@@ -140,7 +140,7 @@
 			</view>
 
 			<!-- Leverage Selection -->
-			<view v-show="lianList" class="leverage-section">
+			<!-- <view v-show="lianList" class="leverage-section">
 				<text class="section-label" :style="{color: theme.textPrimary}">{{$t('my89')}}</text>
 				<view class="leverage-options">
 					<view @click="changelian(item,index)" v-for="(item,index) in lianList"
@@ -149,7 +149,7 @@
 						<text :style="getLeverageBtnTextStyle(index==lian)">{{item}}</text>
 					</view>
 				</view>
-			</view>
+			</view> -->
 
 			<!-- Fee Information -->
 			<view class="fee-section" :style="{borderTop: `1rpx solid ${theme.neutral__200}`, borderBottom: `1rpx solid ${theme.neutral__200}`}">
