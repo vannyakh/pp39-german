@@ -185,9 +185,9 @@
                                                     )
                                                 }}</text
                                             > -->
-                                            <text class="profit-value"
+                                            <!-- <text class="profit-value"
                                                 >{{ item.profit_rate }}%</text
-                                            >
+                                            > -->
                                         </view>
                                     </view>
 
@@ -279,9 +279,9 @@
                                     >{{ selectedStock.type }}</view
                                 >
                             </view>
-                            <text class="preview-profit"
+                            <!-- <text class="preview-profit"
                                 >{{ selectedStock.profit_rate }}%
-                            </text>
+                            </text> -->
                         </view>
                     </view>
 

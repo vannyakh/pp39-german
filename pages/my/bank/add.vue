@@ -8,7 +8,7 @@
                 <view class="flex flex-direction height-100b">
                     <view class="flex-1">
                         <!-- Bank Type Selector -->
-                        <view class="margin-b-24">
+                        <!-- <view class="margin-b-24">
                             <p class="font-28" :style="{color: theme.textPrimary}">{{$t('bank_type')}}</p>
                             <view class="flex align-center margin-t-20" style="gap: 20rpx;">
                                 <view
@@ -26,7 +26,7 @@
                                     <text class="font-28" :style="{color: bank_type == 2 ? theme.white : theme.textPrimary}">{{$t('usdt_address')}}</text>
                                 </view>
                             </view>
-                        </view>
+                        </view> -->
 
                         <!-- Traditional Bank Fields -->
                         <template v-if="bank_type == 1">

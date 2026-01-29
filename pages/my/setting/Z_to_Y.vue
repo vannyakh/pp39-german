@@ -4,7 +4,7 @@
 
 		<v-container size="md">
             <!-- Tabs -->
-            <view class="tabs-container">
+            <!-- <view class="tabs-container">
                 <view
                     class="tab-item"
                     :class="{ 'active': activeTab == 1 }"
@@ -21,7 +21,7 @@
                 >
                     <text class="tab-text" :style="getTabTextStyle(2)">{{$t('currency_tab')}}</text>
                 </view>
-            </view>
+            </view> -->
             <!-- Withdraw Card Section -->
             <view class="padding-c-20">
                 <view

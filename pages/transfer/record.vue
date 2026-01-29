@@ -120,7 +120,7 @@ export default {
 				CND: '€',
 				USD: '$',
 				US: '$',
-				EUR: '€',
+				EURO: '€',
 				GBP: '£',
 				JPY: '¥',
 				AUD: 'A$',

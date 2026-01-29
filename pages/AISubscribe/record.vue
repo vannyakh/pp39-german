@@ -87,7 +87,7 @@
                                             <text class="stock-name" :style="{ color: theme.textPrimary }">{{ item.name }}</text>
                                             <view v-if="item.type" class="type-badge" :style="{ background: theme.primary__light, color: theme.white }">{{ item.type }}</view>
                                         </view>
-                                        <text class="profit-rate">{{ item.profit_rate }}</text>
+                                        <!-- <text class="profit-rate">{{ item.profit_rate }}</text> -->
                                     </view>
                                 </view>
                                 <view class="status-badge" :class="item.status === '1' ? 'active' : 'inactive'">

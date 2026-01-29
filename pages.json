@@ -361,7 +361,14 @@
         {
             "path": "pages/my/exchange",
             "style": {
-                "navigationBarTitleText": "Bulk Stock",
+                "navigationBarTitleText": "Exchange",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/my/bank/index",
+            "style": {
+                "navigationBarTitleText": "Bank",
                 "enablePullDownRefresh": false
             }
         },
@@ -440,6 +447,13 @@
             "style": {
                 "navigationBarTitleText": "",
                 "navigationStyle": "custom"
+            }
+        },
+        {
+            "path": "pages/my/exchange_history",
+            "style": {
+                "navigationBarTitleText": "Exchange History",
+                "enablePullDownRefresh": false
             }
         },
         {
