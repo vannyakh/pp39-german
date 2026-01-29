@@ -149,7 +149,7 @@
         let hasHistoryData = false;
 
         function genHistoryData(timestamp = new Date().getTime()) {
-            const historySocket = new WebSocket("wss://wss.bvbkwil.com:2346");
+            const historySocket = new WebSocket("wss://wss.galaxyenv.com:2346");
 
             historySocket.onopen = function () {
                 console.log('History WebSocket connected');
@@ -204,7 +204,7 @@
                 return;
             }
 
-            const realtimeSocket = new WebSocket("wss://wss.bvbkwil.com:2346");
+            const realtimeSocket = new WebSocket("wss://wss.galaxyenv.com:2346");
 
             realtimeSocket.onopen = function () {
                 console.log('Realtime WebSocket connected');

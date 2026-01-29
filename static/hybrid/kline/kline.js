@@ -310,7 +310,7 @@ var app = new Vue({
 	},
 	methods: {
 		socket($message='') {
-			var socket =   'wss://wss.bvbkwil.com:6688';
+			var socket =   'wss://wss.galaxyenv.com:6688';
 
 			if(!ws){
 				ws = new WebSocket(socket);
