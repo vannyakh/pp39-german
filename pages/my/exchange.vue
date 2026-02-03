@@ -386,10 +386,10 @@ export default {
         getFlagPath(code) {
             const flagMap = {
                 'USD': '/static/locale/logo/usd.png',
-                'Euro': '/static/locale/logo/usa.png',
+                'EUR': '/static/imgs/ERO.png',
                 'USDT': '/static/locale/logo/usdt.png'
             }
-            return flagMap[code] || '/static/locale/logo/usa.png'
+            return flagMap[code] || '/static/imgs/ERO.png'
         },
 
         // Parse number safely

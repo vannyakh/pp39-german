@@ -23,8 +23,8 @@ export const quickMenu = [
     {
         name: 'Trading',
         icon: "/static/imgs/index/func/trading.png",
-        path: "/pages/quotation/index",
-        types: 1,
+        path: "/pages/index/bulk/index",
+        types: 0,
         translationKey: 'trading8'
     },
     {

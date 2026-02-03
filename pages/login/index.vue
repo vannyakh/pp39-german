@@ -102,7 +102,7 @@
 		</view>
 
 		<!-- Service Button -->
-        <kefu-float bottom="140rpx" right="24rpx" />
+        <!-- <kefu-float bottom="140rpx" right="24rpx" /> -->
 
 	</view>
 </template>

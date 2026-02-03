@@ -580,8 +580,8 @@
                 "selectedIconPath": "/static/tabs/position_active.png"
             },
             {
-                "text": "News",
-                "pagePath": "pages/news/index",
+                "text": "Favorites",
+                "pagePath": "pages/optional/index",
                 "iconPath": "/static/tabs/news.png",
                 "selectedIconPath": "/static/tabs/news_active.png"
             },
